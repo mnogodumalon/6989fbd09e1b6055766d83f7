@@ -1,0 +1,57 @@
+[
+  {
+    "content": "Create design_brief.md for Kursverwaltung dashboard",
+    "status": "completed",
+    "activeForm": "Creating design_brief.md for Kursverwaltung dashboard"
+  },
+  {
+    "content": "Update CSS variables and font in index.css and index.html",
+    "status": "completed",
+    "activeForm": "Updating CSS variables and font"
+  },
+  {
+    "content": "Set up React Router in main.tsx and App.tsx",
+    "status": "completed",
+    "activeForm": "Setting up React Router"
+  },
+  {
+    "content": "Create Layout component with sidebar and bottom tabs",
+    "status": "completed",
+    "activeForm": "Creating Layout component"
+  },
+  {
+    "content": "Create DashboardOverview page (/ route)",
+    "status": "completed",
+    "activeForm": "Creating DashboardOverview page"
+  },
+  {
+    "content": "Create KursePage with full CRUD",
+    "status": "completed",
+    "activeForm": "Creating KursePage with CRUD"
+  },
+  {
+    "content": "Create DozentenPage with full CRUD",
+    "status": "completed",
+    "activeForm": "Creating DozentenPage with CRUD"
+  },
+  {
+    "content": "Create TeilnehmerPage with full CRUD",
+    "status": "completed",
+    "activeForm": "Creating TeilnehmerPage with CRUD"
+  },
+  {
+    "content": "Create RaeumePage with full CRUD",
+    "status": "completed",
+    "activeForm": "Creating RaeumePage with CRUD"
+  },
+  {
+    "content": "Build and fix any errors",
+    "status": "completed",
+    "activeForm": "Building and fixing errors"
+  },
+  {
+    "content": "Deploy to GitHub",
+    "status": "in_progress",
+    "activeForm": "Deploying to GitHub"
+  }
+]

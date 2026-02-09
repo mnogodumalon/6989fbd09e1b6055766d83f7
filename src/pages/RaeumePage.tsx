@@ -1,183 +1,278 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import type { Raeume } from '@/types/app'
 import { LivingAppsService } from '@/services/livingAppsService'
-import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog'
+import { DeleteConfirmDialog } from '@/components/DeleteConfirmDialog'
 import { Plus, Pencil, Trash2, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function RaeumePage() {
-  const [records, setRecords] = useState<Raeume[]>([])
+  const [raeume, setRaeume] = useState<Raeume[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
   const [editRecord, setEditRecord] = useState<Raeume | null>(null)
+  const [showCreateDialog, setShowCreateDialog] = useState(false)
   const [deleteRecord, setDeleteRecord] = useState<Raeume | null>(null)
-  const [showCreate, setShowCreate] = useState(false)
+  const [detailRecord, setDetailRecord] = useState<Raeume | null>(null)
 
   async function loadData() {
-    try { setLoading(true); setError(null); setRecords(await LivingAppsService.getRaeume()) } catch (err) { setError(err instanceof Error ? err : new Error('Fehler')) } finally { setLoading(false) }
+    try {
+      setLoading(true)
+      setError(null)
+      const r = await LivingAppsService.getRaeume()
+      setRaeume(r)
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Fehler beim Laden'))
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => { loadData() }, [])
 
-  const sorted = useMemo(() => [...records].sort((a, b) => (a.fields.raumname || '').localeCompare(b.fields.raumname || '')), [records])
-
   async function handleDelete() {
     if (!deleteRecord) return
-    try {
-      await LivingAppsService.deleteRaeumeEntry(deleteRecord.record_id)
-      toast.success(`"${deleteRecord.fields.raumname}" gelöscht`)
-      setDeleteRecord(null)
-      loadData()
-    } catch { toast.error('Fehler beim Löschen') }
+    await LivingAppsService.deleteRaeumeEntry(deleteRecord.record_id)
+    setDeleteRecord(null)
+    setDetailRecord(null)
+    loadData()
   }
 
-  if (error) {
-    return (<div className="flex flex-col items-center justify-center py-20 gap-4"><AlertCircle className="h-12 w-12 text-destructive" /><p className="text-muted-foreground">{error.message}</p><Button variant="outline" onClick={loadData}>Erneut versuchen</Button></div>)
-  }
+  if (loading) return <PageLoading />
+  if (error) return <PageError error={error} onRetry={loadData} />
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Räume</h1>
-        <Button onClick={() => setShowCreate(true)} className="gap-2"><Plus className="h-4 w-4" /> Neuer Raum</Button>
+        <Button onClick={() => setShowCreateDialog(true)}>
+          <Plus className="h-4 w-4 mr-2" /> Neuer Raum
+        </Button>
       </div>
 
-      {loading ? (
-        <div className="space-y-3">{[1, 2, 3].map(i => <Skeleton key={i} className="h-16 w-full" />)}</div>
-      ) : sorted.length === 0 ? (
-        <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground mb-4">Noch keine Räume vorhanden</p><Button onClick={() => setShowCreate(true)}>Ersten Raum anlegen</Button></CardContent></Card>
+      {raeume.length === 0 ? (
+        <EmptyState onAction={() => setShowCreateDialog(true)} />
       ) : (
         <>
-          <div className="hidden md:block">
-            <Card>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Raumname</TableHead>
-                    <TableHead>Gebäude</TableHead>
-                    <TableHead>Kapazität</TableHead>
-                    <TableHead className="w-[100px]"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {sorted.map(r => (
-                    <TableRow key={r.record_id} className="hover:bg-muted/50">
-                      <TableCell className="font-medium">{r.fields.raumname || '-'}</TableCell>
-                      <TableCell>{r.fields.gebaeude || '-'}</TableCell>
-                      <TableCell>{r.fields.kapazitaet != null ? r.fields.kapazitaet : '-'}</TableCell>
-                      <TableCell>
-                        <div className="flex gap-1">
-                          <Button variant="ghost" size="icon" onClick={() => setEditRecord(r)}><Pencil className="h-4 w-4" /></Button>
-                          <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive" onClick={() => setDeleteRecord(r)}><Trash2 className="h-4 w-4" /></Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Card>
-          </div>
+          {/* Mobile: Card list */}
           <div className="md:hidden space-y-3">
-            {sorted.map(r => (
-              <Card key={r.record_id} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-4">
-                  <div className="flex justify-between items-start">
-                    <div className="min-w-0 flex-1">
-                      <div className="font-semibold">{r.fields.raumname || 'Unbenannt'}</div>
-                      {r.fields.gebaeude && <div className="text-sm text-muted-foreground">{r.fields.gebaeude}</div>}
-                      {r.fields.kapazitaet != null && <div className="text-sm text-muted-foreground">Kapazität: {r.fields.kapazitaet}</div>}
-                    </div>
-                    <div className="flex gap-1 shrink-0">
-                      <Button variant="ghost" size="icon" onClick={() => setEditRecord(r)}><Pencil className="h-4 w-4" /></Button>
-                      <Button variant="ghost" size="icon" className="text-destructive" onClick={() => setDeleteRecord(r)}><Trash2 className="h-4 w-4" /></Button>
-                    </div>
+            {raeume.map(r => (
+              <div
+                key={r.record_id}
+                className="bg-card rounded-lg border p-4 cursor-pointer hover:shadow-sm transition-shadow"
+                onClick={() => setDetailRecord(r)}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">{r.fields.raumname || '(Ohne Name)'}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      {r.fields.gebaeude || '–'} · Kapazität: {r.fields.kapazitaet ?? '–'}
+                    </p>
                   </div>
-                </CardContent>
-              </Card>
+                  <div className="flex gap-1" onClick={e => e.stopPropagation()}>
+                    <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setEditRecord(r)}>
+                      <Pencil className="h-3.5 w-3.5" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => setDeleteRecord(r)}>
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
             ))}
+          </div>
+
+          {/* Desktop: Table */}
+          <div className="hidden md:block rounded-lg border bg-card overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Raumname</TableHead>
+                  <TableHead>Gebäude</TableHead>
+                  <TableHead>Kapazität</TableHead>
+                  <TableHead className="w-[100px]">Aktionen</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {raeume.map(r => (
+                  <TableRow key={r.record_id} className="cursor-pointer" onClick={() => setDetailRecord(r)}>
+                    <TableCell className="font-medium">{r.fields.raumname || '(Ohne Name)'}</TableCell>
+                    <TableCell className="text-muted-foreground">{r.fields.gebaeude || '–'}</TableCell>
+                    <TableCell className="text-muted-foreground">{r.fields.kapazitaet ?? '–'}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-1" onClick={e => e.stopPropagation()}>
+                        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setEditRecord(r)}>
+                          <Pencil className="h-3.5 w-3.5" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => setDeleteRecord(r)}>
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </>
       )}
 
-      <RaumDialog open={showCreate || !!editRecord} onOpenChange={(o) => { if (!o) { setShowCreate(false); setEditRecord(null) } }} record={editRecord} onSuccess={loadData} />
+      <RaumDialog
+        open={showCreateDialog || !!editRecord}
+        onOpenChange={open => { if (!open) { setShowCreateDialog(false); setEditRecord(null) } }}
+        record={editRecord}
+        onSuccess={() => { setShowCreateDialog(false); setEditRecord(null); loadData() }}
+      />
 
-      <AlertDialog open={!!deleteRecord} onOpenChange={(o) => !o && setDeleteRecord(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Raum löschen?</AlertDialogTitle>
-            <AlertDialogDescription>Möchtest du den Raum &quot;{deleteRecord?.fields.raumname}&quot; wirklich löschen?</AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Löschen</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      {/* Detail Dialog (simple for rooms) */}
+      {detailRecord && (
+        <Dialog open={!!detailRecord} onOpenChange={open => { if (!open) setDetailRecord(null) }}>
+          <DialogContent className="sm:max-w-sm">
+            <DialogHeader>
+              <DialogTitle>{detailRecord.fields.raumname || '(Ohne Name)'}</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-2 text-sm">
+              <div><span className="text-muted-foreground">Gebäude:</span> {detailRecord.fields.gebaeude || '–'}</div>
+              <div><span className="text-muted-foreground">Kapazität:</span> {detailRecord.fields.kapazitaet ?? '–'}</div>
+            </div>
+            <DialogFooter>
+              <Button variant="ghost" size="sm" className="text-destructive" onClick={() => { setDeleteRecord(detailRecord); setDetailRecord(null) }}>
+                <Trash2 className="h-4 w-4 mr-1" /> Löschen
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => { setEditRecord(detailRecord); setDetailRecord(null) }}>
+                <Pencil className="h-4 w-4 mr-1" /> Bearbeiten
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+
+      <DeleteConfirmDialog
+        open={!!deleteRecord}
+        onOpenChange={open => { if (!open) setDeleteRecord(null) }}
+        recordName={deleteRecord?.fields.raumname || ''}
+        onConfirm={handleDelete}
+      />
     </div>
   )
 }
 
-function RaumDialog({ open, onOpenChange, record, onSuccess }: {
-  open: boolean; onOpenChange: (o: boolean) => void; record: Raeume | null; onSuccess: () => void
+function RaumDialog({
+  open, onOpenChange, record, onSuccess,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  record: Raeume | null
+  onSuccess: () => void
 }) {
   const isEditing = !!record
   const [submitting, setSubmitting] = useState(false)
-  const [form, setForm] = useState({ raumname: '', gebaeude: '', kapazitaet: '' })
+  const [formData, setFormData] = useState({
+    raumname: '', gebaeude: '', kapazitaet: '',
+  })
 
   useEffect(() => {
     if (open) {
-      setForm(record ? {
-        raumname: record.fields.raumname || '',
-        gebaeude: record.fields.gebaeude || '',
-        kapazitaet: record.fields.kapazitaet?.toString() || '',
-      } : { raumname: '', gebaeude: '', kapazitaet: '' })
+      if (record) {
+        setFormData({
+          raumname: record.fields.raumname || '',
+          gebaeude: record.fields.gebaeude || '',
+          kapazitaet: record.fields.kapazitaet?.toString() || '',
+        })
+      } else {
+        setFormData({ raumname: '', gebaeude: '', kapazitaet: '' })
+      }
     }
   }, [open, record])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!formData.raumname.trim()) {
+      toast.error('Bitte einen Raumnamen eingeben.')
+      return
+    }
     setSubmitting(true)
     try {
-      const data: Raeume['fields'] = {
-        raumname: form.raumname,
-        gebaeude: form.gebaeude || undefined,
-        kapazitaet: form.kapazitaet ? Number(form.kapazitaet) : undefined,
+      const apiData: Raeume['fields'] = {
+        raumname: formData.raumname,
+        gebaeude: formData.gebaeude || undefined,
+        kapazitaet: formData.kapazitaet ? Number(formData.kapazitaet) : undefined,
       }
       if (isEditing) {
-        await LivingAppsService.updateRaeumeEntry(record!.record_id, data)
+        await LivingAppsService.updateRaeumeEntry(record!.record_id, apiData)
         toast.success('Raum aktualisiert')
       } else {
-        await LivingAppsService.createRaeumeEntry(data)
+        await LivingAppsService.createRaeumeEntry(apiData)
         toast.success('Raum erstellt')
       }
       onOpenChange(false)
       onSuccess()
     } catch (err) {
-      toast.error(`Fehler: ${err instanceof Error ? err.message : 'Unbekannt'}`)
-    } finally { setSubmitting(false) }
+      toast.error(`Fehler: ${err instanceof Error ? err.message : 'Unbekannter Fehler'}`)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader><DialogTitle>{isEditing ? 'Raum bearbeiten' : 'Neuer Raum'}</DialogTitle></DialogHeader>
+      <DialogContent className="sm:max-w-sm">
+        <DialogHeader>
+          <DialogTitle>{isEditing ? 'Raum bearbeiten' : 'Neuer Raum'}</DialogTitle>
+          <DialogDescription>{isEditing ? 'Bearbeite die Raumdaten.' : 'Füge einen neuen Raum hinzu.'}</DialogDescription>
+        </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2"><Label>Raumname *</Label><Input value={form.raumname} onChange={e => setForm(p => ({ ...p, raumname: e.target.value }))} required /></div>
-          <div className="space-y-2"><Label>Gebäude</Label><Input value={form.gebaeude} onChange={e => setForm(p => ({ ...p, gebaeude: e.target.value }))} /></div>
-          <div className="space-y-2"><Label>Kapazität</Label><Input type="number" min="0" value={form.kapazitaet} onChange={e => setForm(p => ({ ...p, kapazitaet: e.target.value }))} /></div>
+          <div className="space-y-2">
+            <Label htmlFor="raumname">Raumname *</Label>
+            <Input id="raumname" value={formData.raumname} onChange={e => setFormData(p => ({ ...p, raumname: e.target.value }))} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="gebaeude">Gebäude</Label>
+            <Input id="gebaeude" value={formData.gebaeude} onChange={e => setFormData(p => ({ ...p, gebaeude: e.target.value }))} />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="kapazitaet">Kapazität</Label>
+            <Input id="kapazitaet" type="number" min="0" value={formData.kapazitaet} onChange={e => setFormData(p => ({ ...p, kapazitaet: e.target.value }))} />
+          </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Abbrechen</Button>
-            <Button type="submit" disabled={submitting}>{submitting ? 'Speichert...' : isEditing ? 'Speichern' : 'Erstellen'}</Button>
+            <Button type="submit" disabled={submitting}>{submitting ? 'Speichert...' : (isEditing ? 'Speichern' : 'Erstellen')}</Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
+  )
+}
+
+function PageLoading() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between"><Skeleton className="h-8 w-28" /><Skeleton className="h-9 w-32" /></div>
+      <Skeleton className="h-64 w-full rounded-lg" />
+    </div>
+  )
+}
+
+function PageError({ error, onRetry }: { error: Error; onRetry: () => void }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-16 gap-4">
+      <AlertCircle className="h-12 w-12 text-destructive" />
+      <p className="text-muted-foreground text-sm">{error.message}</p>
+      <Button variant="outline" onClick={onRetry}>Erneut versuchen</Button>
+    </div>
+  )
+}
+
+function EmptyState({ onAction }: { onAction: () => void }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-16 gap-4">
+      <p className="text-muted-foreground">Noch keine Räume vorhanden.</p>
+      <Button onClick={onAction}><Plus className="h-4 w-4 mr-2" /> Raum erstellen</Button>
+    </div>
   )
 }

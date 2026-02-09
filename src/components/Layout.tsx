@@ -1,32 +1,26 @@
-import type { ReactNode } from 'react'
 import { NavLink } from 'react-router'
+import { LayoutDashboard, GraduationCap, Users, UserCheck, DoorOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import {
-  LayoutDashboard,
-  BookOpen,
-  GraduationCap,
-  Users,
-  ClipboardList,
-  DoorOpen,
-} from 'lucide-react'
+import { Toaster } from '@/components/ui/sonner'
 
 const NAV_ITEMS = [
   { path: '/', label: 'Übersicht', icon: LayoutDashboard },
-  { path: '/kurse', label: 'Kurse', icon: BookOpen },
-  { path: '/dozenten', label: 'Dozenten', icon: GraduationCap },
-  { path: '/teilnehmer', label: 'Teilnehmer', icon: Users },
-  { path: '/anmeldungen', label: 'Anmeldungen', icon: ClipboardList },
+  { path: '/kurse', label: 'Kurse', icon: GraduationCap },
+  { path: '/dozenten', label: 'Dozenten', icon: Users },
+  { path: '/teilnehmer', label: 'Teilnehmer', icon: UserCheck },
   { path: '/raeume', label: 'Räume', icon: DoorOpen },
 ]
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 border-r border-sidebar-border bg-sidebar">
-        <div className="p-6 flex items-center gap-2.5">
-          <GraduationCap className="h-6 w-6 text-primary" />
-          <h1 className="text-lg font-bold text-primary">Kursverwaltung</h1>
+      {/* Desktop: Sidebar navigation */}
+      <aside className="hidden md:flex md:w-[260px] md:flex-col md:fixed md:inset-y-0 border-r border-sidebar-border bg-sidebar">
+        <div className="p-6 flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
+            <GraduationCap className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <h1 className="text-lg font-bold text-sidebar-foreground">Kursverwaltung</h1>
         </div>
         <nav className="flex-1 px-3 space-y-1">
           {NAV_ITEMS.map((item) => (
@@ -38,8 +32,8 @@ export function Layout({ children }: { children: ReactNode }) {
                 cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
                   isActive
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                    ? 'bg-sidebar-primary text-sidebar-primary-foreground'
+                    : 'text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                 )
               }
             >
@@ -50,15 +44,15 @@ export function Layout({ children }: { children: ReactNode }) {
         </nav>
       </aside>
 
-      {/* Main content */}
-      <main className="md:pl-64 pb-20 md:pb-0">
-        <div className="p-4 md:p-8 max-w-[1200px] mx-auto animate-in fade-in duration-300">
+      {/* Main content area */}
+      <main className="md:pl-[260px]">
+        <div className="p-4 md:p-8 max-w-[1400px] mx-auto pb-24 md:pb-8">
           {children}
         </div>
       </main>
 
-      {/* Mobile Bottom Tabs */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t border-border bg-card z-50">
+      {/* Mobile: Bottom tab navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-card z-50">
         <div className="flex justify-around">
           {NAV_ITEMS.map((item) => (
             <NavLink
@@ -67,25 +61,19 @@ export function Layout({ children }: { children: ReactNode }) {
               end={item.path === '/'}
               className={({ isActive }) =>
                 cn(
-                  'flex flex-col items-center gap-0.5 py-2 px-1 text-[10px] font-medium transition-colors min-w-0 flex-1',
-                  isActive
-                    ? 'text-primary'
-                    : 'text-muted-foreground'
+                  'flex flex-col items-center gap-1 py-2 px-3 text-[11px] font-medium transition-colors min-w-0',
+                  isActive ? 'text-primary' : 'text-muted-foreground'
                 )
               }
             >
-              {({ isActive }) => (
-                <>
-                  <div className={cn('relative', isActive && 'after:absolute after:-top-2 after:left-1/2 after:-translate-x-1/2 after:w-5 after:h-0.5 after:bg-primary after:rounded-full')}>
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <span className="truncate">{item.label}</span>
-                </>
-              )}
+              <item.icon className="h-5 w-5" />
+              <span className="truncate">{item.label}</span>
             </NavLink>
           ))}
         </div>
       </nav>
+
+      <Toaster />
     </div>
   )
 }
