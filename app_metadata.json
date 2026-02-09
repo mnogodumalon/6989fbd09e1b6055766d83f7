@@ -2,220 +2,6 @@
   "appgroup_id": "6989fbd09e1b6055766d83f7",
   "appgroup_name": "Kursverwaltung",
   "apps": {
-    "dozenten": {
-      "app_id": "6989fb9e7ec54fdd7f7cc847",
-      "name": "Dozenten",
-      "controls": {
-        "vorname": {
-          "identifier": "vorname",
-          "label": "Vorname",
-          "type": "string",
-          "subtype": "text",
-          "fulltype": "string/text",
-          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": true,
-          "in_text": true,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "nachname": {
-          "identifier": "nachname",
-          "label": "Nachname",
-          "type": "string",
-          "subtype": "text",
-          "fulltype": "string/text",
-          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": true,
-          "in_text": true,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "email": {
-          "identifier": "email",
-          "label": "E-Mail",
-          "type": "string",
-          "subtype": "email",
-          "fulltype": "string/email",
-          "description": "A valid email address (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": false,
-          "in_text": false,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "telefon": {
-          "identifier": "telefon",
-          "label": "Telefon",
-          "type": "string",
-          "subtype": "tel",
-          "fulltype": "string/tel",
-          "description": "A valid telephone number. Might include country prefix and should include area code (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": false,
-          "in_text": false,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "fachgebiet": {
-          "identifier": "fachgebiet",
-          "label": "Fachgebiet",
-          "type": "string",
-          "subtype": "text",
-          "fulltype": "string/text",
-          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": false,
-          "in_text": false,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        }
-      }
-    },
-    "raeume": {
-      "app_id": "6989fba40d9a8c21a46a7d96",
-      "name": "R\u00e4ume",
-      "controls": {
-        "raumname": {
-          "identifier": "raumname",
-          "label": "Raumname",
-          "type": "string",
-          "subtype": "text",
-          "fulltype": "string/text",
-          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": true,
-          "in_text": true,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "gebaeude": {
-          "identifier": "gebaeude",
-          "label": "Geb\u00e4ude",
-          "type": "string",
-          "subtype": "text",
-          "fulltype": "string/text",
-          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": true,
-          "in_text": true,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "kapazitaet": {
-          "identifier": "kapazitaet",
-          "label": "Kapazit\u00e4t",
-          "type": "number",
-          "subtype": null,
-          "fulltype": "number",
-          "description": "A decimal number value (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": false,
-          "in_text": false,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true,
-          "precision": null
-        }
-      }
-    },
-    "teilnehmer": {
-      "app_id": "6989fba5e714566fa12888de",
-      "name": "Teilnehmer",
-      "controls": {
-        "email": {
-          "identifier": "email",
-          "label": "E-Mail",
-          "type": "string",
-          "subtype": "email",
-          "fulltype": "string/email",
-          "description": "A valid email address (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": false,
-          "in_text": false,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "telefon": {
-          "identifier": "telefon",
-          "label": "Telefon",
-          "type": "string",
-          "subtype": "tel",
-          "fulltype": "string/tel",
-          "description": "A valid telephone number. Might include country prefix and should include area code (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": false,
-          "in_text": false,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "geburtsdatum": {
-          "identifier": "geburtsdatum",
-          "label": "Geburtsdatum",
-          "type": "date",
-          "subtype": "date",
-          "fulltype": "date/date",
-          "description": "A calendar date consisting of year, month and day. (Or `null`/`None`)\n\nThe field value will be a string in the format `<YYYY>-<MM>-<DD>` or `null`/`None`.\n\nFor example: `1642-12-25`.",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": false,
-          "in_text": false,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "vorname": {
-          "identifier": "vorname",
-          "label": "Vorname",
-          "type": "string",
-          "subtype": "text",
-          "fulltype": "string/text",
-          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": true,
-          "in_text": true,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        },
-        "nachname": {
-          "identifier": "nachname",
-          "label": "Nachname",
-          "type": "string",
-          "subtype": "text",
-          "fulltype": "string/text",
-          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
-          "required": null,
-          "in_list": true,
-          "in_mobile_list": true,
-          "in_text": true,
-          "in_structured_search": false,
-          "in_fulltext_search": false,
-          "in_expert_search": true
-        }
-      }
-    },
     "kurse": {
       "app_id": "6989fba5d8a2b2c7cde545c5",
       "name": "Kurse",
@@ -346,6 +132,139 @@
         }
       }
     },
+    "raeume": {
+      "app_id": "6989fba40d9a8c21a46a7d96",
+      "name": "R\u00e4ume",
+      "controls": {
+        "raumname": {
+          "identifier": "raumname",
+          "label": "Raumname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "gebaeude": {
+          "identifier": "gebaeude",
+          "label": "Geb\u00e4ude",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "kapazitaet": {
+          "identifier": "kapazitaet",
+          "label": "Kapazit\u00e4t",
+          "type": "number",
+          "subtype": null,
+          "fulltype": "number",
+          "description": "A decimal number value (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true,
+          "precision": null
+        }
+      }
+    },
+    "dozenten": {
+      "app_id": "6989fb9e7ec54fdd7f7cc847",
+      "name": "Dozenten",
+      "controls": {
+        "vorname": {
+          "identifier": "vorname",
+          "label": "Vorname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "nachname": {
+          "identifier": "nachname",
+          "label": "Nachname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "email": {
+          "identifier": "email",
+          "label": "E-Mail",
+          "type": "string",
+          "subtype": "email",
+          "fulltype": "string/email",
+          "description": "A valid email address (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "telefon": {
+          "identifier": "telefon",
+          "label": "Telefon",
+          "type": "string",
+          "subtype": "tel",
+          "fulltype": "string/tel",
+          "description": "A valid telephone number. Might include country prefix and should include area code (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "fachgebiet": {
+          "identifier": "fachgebiet",
+          "label": "Fachgebiet",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        }
+      }
+    },
     "anmeldungen": {
       "app_id": "6989fba67d62a555af2368e0",
       "name": "Anmeldungen",
@@ -413,15 +332,96 @@
           "in_expert_search": true
         }
       }
+    },
+    "teilnehmer": {
+      "app_id": "6989fba5e714566fa12888de",
+      "name": "Teilnehmer",
+      "controls": {
+        "email": {
+          "identifier": "email",
+          "label": "E-Mail",
+          "type": "string",
+          "subtype": "email",
+          "fulltype": "string/email",
+          "description": "A valid email address (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "telefon": {
+          "identifier": "telefon",
+          "label": "Telefon",
+          "type": "string",
+          "subtype": "tel",
+          "fulltype": "string/tel",
+          "description": "A valid telephone number. Might include country prefix and should include area code (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "geburtsdatum": {
+          "identifier": "geburtsdatum",
+          "label": "Geburtsdatum",
+          "type": "date",
+          "subtype": "date",
+          "fulltype": "date/date",
+          "description": "A calendar date consisting of year, month and day. (Or `null`/`None`)\n\nThe field value will be a string in the format `<YYYY>-<MM>-<DD>` or `null`/`None`.\n\nFor example: `1642-12-25`.",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "vorname": {
+          "identifier": "vorname",
+          "label": "Vorname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        },
+        "nachname": {
+          "identifier": "nachname",
+          "label": "Nachname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": false,
+          "in_expert_search": true
+        }
+      }
     }
   },
   "metadata": {
     "apps_list": [
-      "Dozenten",
-      "R\u00e4ume",
-      "Teilnehmer",
       "Kurse",
-      "Anmeldungen"
+      "R\u00e4ume",
+      "Dozenten",
+      "Anmeldungen",
+      "Teilnehmer"
     ]
   }
 }

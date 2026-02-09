@@ -3,31 +3,33 @@
 ## 1. App Analysis
 
 ### What This App Does
-Kursverwaltung is a course management system for an educational organization. It tracks instructors (Dozenten), rooms (Räume), participants (Teilnehmer), courses (Kurse), and registrations (Anmeldungen). The system manages the full lifecycle from course creation through participant registration and payment tracking.
+Kursverwaltung is a course management system for an educational institution or training provider. It manages courses (Kurse), rooms (Räume), instructors (Dozenten), registrations (Anmeldungen), and participants (Teilnehmer). The system tracks which courses are running, who teaches them, where they take place, and who has signed up.
 
 ### Who Uses This
-A course administrator or education coordinator who needs a quick overview of their course offerings, enrollment status, and revenue. They manage dozens of courses per semester, need to spot underbooked or overbooked courses, and track outstanding payments.
+A course administrator or program manager who needs an at-a-glance overview of their course operations. They manage dozens of courses, need to know enrollment numbers, track payments, and keep everything organized. They think in terms of "Which courses are running? How full are they? Who hasn't paid yet?"
 
 ### The ONE Thing Users Care About Most
-**Registration status across all courses** — how many seats are filled vs. available, and whether people have paid. This is the daily pulse check: "Are my courses filling up? Is money coming in?"
+**Current enrollment status** - How many registrations do they have, and how full are the courses? This is the heartbeat of a course management operation. Empty courses lose money; overfull courses need action.
 
 ### Primary Actions (IMPORTANT!)
-1. **Neue Anmeldung** → Primary Action Button — register a participant for a course (most frequent daily action)
-2. View course details and enrollment counts
-3. Check payment status
+1. **Neue Anmeldung** (New Registration) - The most frequent action. Someone calls or emails, and the admin needs to register them for a course immediately. This is the Primary Action Button.
+2. **Neuen Kurs anlegen** (Create New Course) - Adding a new course to the schedule.
+3. **Neuen Teilnehmer anlegen** (Add New Participant) - Registering a new person in the system.
 
 ---
 
 ## 2. What Makes This Design Distinctive
 
 ### Visual Identity
-The dashboard uses a warm, academic palette — a soft ivory background paired with a deep indigo primary accent that feels scholarly and trustworthy. The warmth comes from subtle amber highlights on revenue figures and payment badges, creating an "organized desk" aesthetic. This is a tool for someone who runs a well-managed Volkshochschule, not a Silicon Valley startup.
+The design uses a cool slate-blue base with a warm amber accent that creates a professional yet approachable feel - like a well-run school office. The slight warmth of the amber against the cool background prevents the dashboard from feeling sterile or corporate. The combination signals competence and organization without being cold.
 
 ### Layout Strategy
-The layout is **asymmetric on desktop** with a dominant left column (2/3 width) holding the hero KPI and course enrollment chart, and a narrower right column (1/3 width) for recent registrations and quick stats. The hero — a large "Auslastung" (utilization) percentage — anchors the top-left, rendered large and bold with a subtle circular progress indicator. Below the hero row, secondary KPIs sit in a compact 4-column strip using different visual weights. The chart spans the full left column beneath, while the right column stacks a "Letzte Anmeldungen" list and a "Unbezahlt" alert section.
+The layout is **asymmetric on desktop** with a wide main column (2/3) and a narrower activity column (1/3). The hero element is a large enrollment summary that takes visual priority through size and whitespace. Below, course cards with progress bars showing fill rates create visual rhythm through varying fill levels. The asymmetry creates natural reading flow: overview first (left), then recent activity and quick actions (right).
+
+On mobile, the layout becomes a focused vertical flow: hero enrollment number at top, then a horizontal scroll of secondary KPIs, followed by course list and activity stream.
 
 ### Unique Element
-The hero utilization metric uses a **semicircular gauge** rendered in indigo, showing the aggregate fill rate across all courses. The gauge has a thick 6px stroke with rounded endpoints, and the percentage sits centered below the arc in a large 48px bold numeral. This makes the abstract concept of "how full are my courses" immediately visceral and glanceable.
+Each course card features a **capacity progress bar** with a color gradient from green (under 50%) through amber (50-80%) to red (over 80% full). This creates an instant visual heat map of enrollment pressure across all courses, making it immediately obvious which courses need attention - either marketing (empty) or capacity management (full).
 
 ---
 
@@ -36,243 +38,322 @@ The hero utilization metric uses a **semicircular gauge** rendered in indigo, sh
 ### Font
 - **Family:** Plus Jakarta Sans
 - **URL:** `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap`
-- **Why this font:** Plus Jakarta Sans has a professional warmth — geometric enough for data display but with soft terminals that avoid coldness. Its wide weight range (300–800) enables strong typographic hierarchy. It suits an educational/administrative context perfectly.
+- **Why this font:** Plus Jakarta Sans has a professional, geometric quality with subtle rounded terminals that feel approachable and modern - ideal for an educational management context. It provides excellent weight variety for creating strong typographic hierarchy.
 
 ### Color Palette
 All colors as complete hsl() functions:
 
 | Purpose | Color | CSS Variable |
 |---------|-------|--------------|
-| Page background | `hsl(40 33% 97%)` | `--background` |
-| Main text | `hsl(230 25% 18%)` | `--foreground` |
+| Page background | `hsl(216 25% 97%)` | `--background` |
+| Main text | `hsl(220 20% 14%)` | `--foreground` |
 | Card background | `hsl(0 0% 100%)` | `--card` |
-| Card text | `hsl(230 25% 18%)` | `--card-foreground` |
-| Borders | `hsl(40 18% 88%)` | `--border` |
-| Primary action (indigo) | `hsl(234 62% 46%)` | `--primary` |
+| Card text | `hsl(220 20% 14%)` | `--card-foreground` |
+| Borders | `hsl(216 18% 90%)` | `--border` |
+| Primary action | `hsl(32 95% 52%)` | `--primary` |
 | Text on primary | `hsl(0 0% 100%)` | `--primary-foreground` |
-| Accent highlight (amber) | `hsl(38 92% 50%)` | `--accent` |
-| Muted background | `hsl(40 20% 94%)` | `--muted` |
-| Muted text | `hsl(230 10% 48%)` | `--muted-foreground` |
-| Success/positive | `hsl(152 60% 40%)` | (component use) |
-| Error/negative | `hsl(0 72% 51%)` | `--destructive` |
+| Accent highlight | `hsl(216 60% 52%)` | `--accent` |
+| Muted background | `hsl(216 18% 93%)` | `--muted` |
+| Muted text | `hsl(216 10% 52%)` | `--muted-foreground` |
+| Success/positive | `hsl(152 55% 42%)` | (component use) |
+| Error/negative | `hsl(4 72% 52%)` | `--destructive` |
 
 ### Why These Colors
-The warm ivory background (`hsl(40 33% 97%)`) avoids sterile white and creates a paper-like feel suited to an academic environment. The deep indigo primary (`hsl(234 62% 46%)`) provides gravitas and trust — think classic university branding. The amber accent (`hsl(38 92% 50%)`) adds warmth for revenue/payment highlights and creates visual pop against the indigo. The green success and red destructive are functional only, used sparingly for payment badges.
+The cool slate-blue background (`hsl(216 25% 97%)`) creates a calm, organized base. The warm amber primary (`hsl(32 95% 52%)`) draws attention to actions and important highlights without being aggressive. The blue accent (`hsl(216 60% 52%)`) is used for data links and secondary interactive elements. Success green and destructive red are used sparingly for payment status and capacity warnings.
 
 ### Background Treatment
-The page background is a warm off-white (`hsl(40 33% 97%)`). Cards use pure white to lift off the background. No gradients — the warmth comes from the base tone itself. The subtle contrast between background and cards creates natural depth without shadows on every element.
+The page background is a subtle cool off-white (`hsl(216 25% 97%)`) - not pure white. Cards sit on top with pure white backgrounds, creating gentle depth through contrast alone. No gradients or textures - the depth comes from the card elevation pattern.
 
 ---
 
 ## 4. Mobile Layout (Phone)
 
 ### Layout Approach
-Mobile uses a single-column vertical flow. The hero utilization gauge dominates the first viewport fold, taking about 40% of screen height. Below it, four compact stat pills sit in a 2x2 grid. Then a full-width chart, followed by the recent registrations list. The primary action button is fixed at the bottom of the screen.
+The hero dominates the first viewport with a large enrollment count and payment summary. Below, secondary KPIs are in a compact horizontal scroll strip. The course list follows as stacked cards. Visual interest comes from the size contrast between the large hero number and the compact KPI chips below it.
 
 ### What Users See (Top to Bottom)
 
 **Header:**
-A compact header with the title "Kursverwaltung" in 20px/700 weight on the left. No navigation — this is a single-page dashboard.
+A simple top bar with the app title "Kursverwaltung" in 600 weight, left-aligned. Right side has a small "+" icon button as quick-add for new registrations.
 
 **Hero Section (The FIRST thing users see):**
-- A semicircular gauge showing aggregate course utilization percentage
-- The gauge is rendered as an SVG semicircle arc, 200px wide, using a 6px stroke in `--primary` color with rounded caps
-- The background arc uses `--muted` color
-- Below the arc, the percentage number in 48px/800 weight
-- Below that, the label "Gesamtauslastung" in 13px/400 `--muted-foreground`
-- Below that, a subtitle line: "X von Y Plätzen belegt" in 14px/500
-- This hero sits inside a card with generous 24px padding
-- Why hero: The administrator's #1 question every morning is "how full are my courses?"
+A large card spanning full width with:
+- The label "Anmeldungen gesamt" in small (12px), muted text, uppercase tracking-wide
+- The total count of registrations as a massive number (48px, 800 weight)
+- Below: two inline stats - "X bezahlt" (with green dot) and "X offen" (with amber dot), both in 14px muted text
+- This takes roughly 25% of viewport height
+- Why: The admin's first question is always "how many registrations do we have?"
 
-**Section 2: Quick Stats (2x2 grid)**
-Four compact stat cards in a 2-column grid with 12px gap:
-1. **Aktive Kurse** — count of courses where today is between startdatum and enddatum. Icon: `BookOpen`. Display: large number 28px/700, label 12px/500 muted.
-2. **Anmeldungen** — total count of all registrations. Icon: `Users`. Same styling.
-3. **Umsatz** — sum of preis for all registrations where bezahlt=true, formatted as EUR currency. Icon: `Euro`. Number in `--accent` color (amber).
-4. **Offen** — count of registrations where bezahlt=false. Icon: `AlertCircle`. Number in `--destructive` color if > 0.
+**Section 2: Quick KPIs (horizontal scroll)**
+A horizontally scrollable row of compact stat chips (not cards - just inline rounded containers):
+- "X Kurse aktiv" (total active courses)
+- "X Dozenten" (total instructors)
+- "X Räume" (total rooms)
+- "X Teilnehmer" (total unique participants)
+Each chip: muted background, small icon left, number in semibold, label in regular weight. Height ~40px.
 
-**Section 3: Anmeldungen pro Kurs (Bar Chart)**
-- Horizontal bar chart showing each course's registration count vs. max capacity
-- Each bar has two segments: filled (primary color) and remaining (muted)
-- Course title as Y-axis label, truncated to 20 chars on mobile
-- Chart height adapts to number of courses (min 200px, ~40px per course)
-- Title: "Belegung pro Kurs" in 16px/600
-- Wrapped in a card
+**Section 3: Kurse (Course List)**
+Section header "Kurse" with a small "Alle verwalten" text link on the right.
+Stacked course cards, each showing:
+- Course title (16px, 600 weight)
+- Dozent name and date range in muted text (13px)
+- Capacity progress bar (full width, 6px height, rounded)
+- "X / Y Plätze" text below bar (13px, muted)
+- Price badge on the right side in small text
+Cards have 12px padding, subtle border, 8px radius.
+Show first 5 courses, "Alle X Kurse anzeigen" link below.
 
 **Section 4: Letzte Anmeldungen (Recent Registrations)**
-- A list of the 5 most recent registrations, sorted by anmeldedatum descending
-- Each row shows: Participant name (resolved via lookup), course title (resolved via lookup), date formatted as "dd.MM.yyyy", and a bezahlt badge (green "Bezahlt" / red "Offen")
-- Rows separated by subtle borders
-- Title: "Letzte Anmeldungen" in 16px/600
-- Wrapped in a card
+Section header "Letzte Anmeldungen".
+Simple list items (no cards) with:
+- Participant name (left, medium weight)
+- Course name (below, small, muted)
+- Date (right-aligned, small, muted)
+- Payment status badge (green "Bezahlt" or amber "Offen")
+Show last 5, "Alle anzeigen" link below.
 
-**Bottom Fixed Action:**
-A full-width button fixed to the bottom of the viewport with 16px margin from edges and 12px from bottom. Background: `--primary`. Text: "Neue Anmeldung" with a Plus icon. Height: 48px. Border-radius: 12px. Shadow: `0 4px 12px hsl(234 62% 46% / 0.3)`.
+**Bottom Navigation / Action:**
+Fixed bottom button: "Neue Anmeldung" in primary color (amber), full width minus margins, 48px height, centered text with Plus icon. This is always accessible for the #1 action.
 
 ### Mobile-Specific Adaptations
-- The bar chart uses horizontal bars (easier to read on narrow screens)
-- Course names truncated with ellipsis at 20 chars
-- Stats grid uses 2 columns instead of 4
-- Recent registrations show compact rows (name + course on one line, date + badge on second line)
-- Bottom padding of 80px on the page to account for the fixed action button
+- Hero takes full width, no side margins on the hero card
+- KPI chips are horizontally scrollable (no wrapping)
+- Course cards stack vertically, one per row
+- Recent registrations use a compact list style, not cards
+- Tabs component at the bottom of course list to switch between "Kurse", "Dozenten", "Räume", "Teilnehmer" views
 
 ### Touch Targets
-- All interactive elements minimum 44px height
-- The fixed action button is 48px tall with generous horizontal padding
-- List items have 12px vertical padding for comfortable tapping
+- All list items are at least 44px tall for comfortable tapping
+- The fixed bottom CTA button is 48px tall
+- Edit/delete actions are accessed via tapping on a list item to open a detail sheet
 
 ### Interactive Elements
-- Tapping a course bar in the chart could show a tooltip with exact numbers (handled by recharts)
-- Tapping a registration row in the list is not interactive (all info already visible)
+- Tapping a course card opens a bottom sheet with full course details and edit/delete actions
+- Tapping a registration opens a detail sheet with participant info and payment toggle
+- Long list items use a slide-up bottom sheet pattern for detail views on mobile
 
 ---
 
 ## 5. Desktop Layout
 
 ### Overall Structure
-A max-width container (1200px) centered on screen. The layout uses a **2-column asymmetric grid**: left column 2fr, right column 1fr, with a 24px gap.
+A two-column asymmetric layout with a max-width container (1280px), centered:
+- **Left column (65%)**: Hero stats row + Course management table + Tabs for other apps
+- **Right column (35%)**: Quick actions panel + Recent registrations list + Quick stats sidebar
 
-**Row 1: Header bar (full width)**
-- Left: "Kursverwaltung" in 28px/700
-- Right: "Neue Anmeldung" primary button (not fixed, inline in header)
-
-**Row 2: Hero + Secondary KPIs (full width)**
-- Left (2fr): Hero card with the semicircular gauge — same as mobile but gauge is 240px wide, percentage in 56px/800, with more whitespace (32px padding)
-- Right (1fr): A vertical stack of 4 stat cards, each compact (icon + number + label in a single row layout). Each card has 16px padding, the number in 24px/700, the label in 13px/500 muted.
-
-**Row 3: Chart + Recent Activity**
-- Left (2fr): "Belegung pro Kurs" horizontal bar chart in a card. Bars show filled vs. capacity. Course names on Y-axis, counts on X-axis. Chart height adapts.
-- Right (1fr): "Letzte Anmeldungen" card with the 8 most recent registrations. Each entry: participant name, course title, date, payment badge. Clean list with dividers.
-
-**Row 4: Dozenten & Räume overview (full width, 2 equal columns)**
-- Left: "Dozenten" card showing a compact list of instructors with their Fachgebiet badge and number of assigned courses
-- Right: "Räume" card showing rooms with Gebäude, Kapazität, and number of courses assigned
+The eye goes: Hero stats (top-left) → Course table (center-left) → Recent activity (right).
 
 ### Section Layout
-- Top area: Header with title + primary action button
-- Main content (left): Hero gauge + bar chart (the analytical core)
-- Supporting content (right): Stats column + activity feed (contextual info)
-- Bottom: Reference data (instructors, rooms) — less urgent but still useful
+
+**Top Area (Full Width):**
+Header bar with "Kursverwaltung" title (24px, 700 weight) on the left and the primary action button "Neue Anmeldung" (amber, with Plus icon) on the right.
+
+**Left Column - Hero Stats Row:**
+Three stat cards in a row (equal width within the left column):
+1. "Anmeldungen" - Large number (36px, 700 weight), with "X bezahlt / Y offen" subtitle
+2. "Kurse aktiv" - Large number, with date range context
+3. "Auslastung" - Average capacity percentage across all courses, with a small inline bar
+
+**Left Column - Main Content:**
+Tabbed interface with tabs: **Kurse** | **Dozenten** | **Räume** | **Teilnehmer** | **Anmeldungen**
+
+Each tab shows a table view of the respective app's data with:
+- Column headers matching the app's fields
+- Inline edit (pencil icon) and delete (trash icon) buttons per row
+- "Neuen Eintrag erstellen" button above each table
+- Search/filter input above the table
+- Sortable column headers
+
+The **Kurse** tab (default) shows: Titel, Dozent (resolved name), Raum (resolved name), Startdatum, Enddatum, Teilnehmer (count from Anmeldungen), Kapazität (progress bar), Preis, Actions.
+
+**Right Column - Activity & Quick Stats:**
+- **Letzte Anmeldungen**: List of recent 8 registrations with participant name, course, date, payment status badge
+- **Zahlungsübersicht**: Small summary showing total revenue (sum of prices for paid registrations), outstanding amount, payment rate percentage
+- **Quick Stats**: Compact list of stats - total Dozenten, total Räume, total Teilnehmer
 
 ### What Appears on Hover
-- Bar chart bars show a tooltip with exact enrolled/capacity numbers
-- Stat cards get a subtle shadow lift (`0 2px 8px hsl(0 0% 0% / 0.06)`)
-- Recent registration rows get a light background highlight (`--muted`)
-- Dozenten/Räume list items get a light background highlight
+- Table rows highlight with a subtle muted background on hover
+- Course capacity bars show exact "X/Y" tooltip on hover
+- Stat cards show a subtle lift shadow on hover
+- Edit/Delete action buttons become more visible on row hover (slightly transparent by default)
 
 ### Clickable/Interactive Areas
-- No drill-down needed — the dashboard shows all relevant data inline
-- The bar chart has native recharts hover tooltips
+- Clicking a course name in the table opens the edit dialog pre-filled
+- Clicking a participant name in the registrations list opens their detail dialog
+- All stat cards are not clickable (they show everything already)
+- Table column headers are clickable for sorting
 
 ---
 
 ## 6. Components
 
 ### Hero KPI
-- **Title:** Gesamtauslastung
-- **Data source:** Kurse (for max capacity) + Anmeldungen (for actual registrations)
-- **Calculation:** (total registrations / sum of all maximale_teilnehmer) * 100, rounded to nearest integer. Count registrations per course, sum up. Sum all maximale_teilnehmer across courses. Divide.
-- **Display:** Semicircular SVG gauge (180-degree arc). Foreground arc in `--primary`, background arc in `--muted`. Percentage number centered below arc in 48px/800 (mobile) or 56px/800 (desktop). Label "Gesamtauslastung" below in muted text. Subtitle "X von Y Plätzen belegt" below label.
-- **Context shown:** Absolute numbers (X von Y) provide context beyond the percentage
-- **Why this is the hero:** The fill rate determines whether courses are viable, whether marketing is needed, or whether new courses should be opened. It's the single most actionable metric.
+The MOST important metric that users see first.
+
+- **Title:** Anmeldungen gesamt
+- **Data source:** Anmeldungen app
+- **Calculation:** Total count of all Anmeldungen records
+- **Display:** Large number (48px on mobile, 36px on desktop), with two sub-stats: count where bezahlt=true ("bezahlt") and count where bezahlt=false/null ("offen")
+- **Context shown:** Payment split with colored dots (green for paid, amber for open)
+- **Why this is the hero:** Registration count is the #1 metric for a course admin - it directly represents business activity and revenue
 
 ### Secondary KPIs
 
 **Aktive Kurse**
-- Source: Kurse
-- Calculation: Count where `startdatum <= today <= enddatum`. If startdatum or enddatum is null, exclude from count.
-- Format: integer
-- Display: Compact card with `BookOpen` icon (16px, muted), number in 28px/700 (mobile) or 24px/700 (desktop), label "Aktive Kurse" in 12px/500 muted
+- Source: Kurse app
+- Calculation: Total count of all Kurse records
+- Format: number
+- Display: Stat card with large number (desktop) / chip (mobile)
 
-**Gesamtanmeldungen**
-- Source: Anmeldungen
-- Calculation: Total count of all registration records
-- Format: integer
-- Display: Compact card with `Users` icon, same styling as above, label "Anmeldungen"
+**Durchschnittliche Auslastung**
+- Source: Cross-reference Anmeldungen (count per Kurs) vs Kurse (maximale_teilnehmer)
+- Calculation: Average of (registrations per course / max capacity per course) across all courses, as percentage
+- Format: percent
+- Display: Stat card with number and small inline progress bar
 
 **Umsatz (bezahlt)**
-- Source: Anmeldungen + Kurse
-- Calculation: For each Anmeldung where bezahlt=true, resolve the kurs lookup to get preis, then sum all preis values. Format as EUR currency.
-- Format: currency EUR (e.g., "12.450 €")
-- Display: Compact card with `Euro` icon. Number displayed in `--accent` color (amber) to draw attention to revenue. Label "Umsatz (bezahlt)"
+- Source: Cross-reference Anmeldungen (bezahlt=true) with Kurse (preis)
+- Calculation: Sum of Kurs.preis for each Anmeldung where bezahlt=true
+- Format: currency EUR
+- Display: In right sidebar "Zahlungsübersicht" section
 
-**Offene Zahlungen**
-- Source: Anmeldungen
-- Calculation: Count of registrations where bezahlt=false or bezahlt is null
-- Format: integer
-- Display: Compact card with `AlertCircle` icon. Number in `--destructive` color if count > 0, otherwise in default foreground. Label "Offen"
-
-### Chart
-- **Type:** Horizontal BarChart — horizontal bars are ideal for comparing course names (text labels) against numeric enrollment. Vertical bars would clip long course names.
-- **Title:** "Belegung pro Kurs"
-- **What question it answers:** "Which courses are full, which need more students?" — helps the admin prioritize marketing or close registrations.
-- **Data source:** Kurse (for titel, maximale_teilnehmer) + Anmeldungen (count per course)
-- **X-axis:** Count (number of registrations and capacity)
-- **Y-axis:** Course title (kurse.titel, truncated to 20 chars on mobile, 35 on desktop)
-- **Bars:** Each course has a stacked bar: filled portion (count of Anmeldungen for this course) in `--primary`, remaining capacity in `--muted`. If a course has no maximale_teilnehmer set, show only the filled bar.
-- **Mobile simplification:** Shorter Y-axis labels (20 chars), smaller font (11px). Remove X-axis tick labels, show values at end of bars instead.
+### Chart (if applicable)
+No chart is included. The capacity progress bars on each course row serve as inline visualizations that are more actionable than a standalone chart for this use case. A chart would add visual noise without adding insight that the progress bars don't already provide.
 
 ### Lists/Tables
 
-**Letzte Anmeldungen**
-- Purpose: Shows recent activity so the admin knows what happened today/this week
-- Source: Anmeldungen + Teilnehmer (for name) + Kurse (for title)
-- Fields shown: Participant full name (vorname + nachname), Course title, Anmeldedatum formatted as "dd.MM.yyyy", Bezahlt status badge
-- Mobile style: Compact list — line 1: name + course; line 2: date + badge. 5 items max.
-- Desktop style: Clean list with subtle row dividers. Each row: name, course, date, badge inline. 8 items max.
-- Sort: By anmeldedatum descending (newest first)
-- Limit: 5 on mobile, 8 on desktop
+**Kurse Table (Desktop) / Card List (Mobile)**
+- Purpose: Central management view for all courses
+- Source: Kurse app, enriched with Dozenten names, Raum names, and Anmeldungen counts
+- Fields shown: Titel, Dozent (resolved), Raum (resolved), Startdatum, Enddatum, Anmeldungen/Kapazität (progress bar), Preis
+- Mobile style: Stacked cards with key info
+- Desktop style: Full table with sortable columns
+- Sort: By Startdatum (nearest first)
+- Limit: All (paginated at 10 on mobile)
 
-**Dozenten (Desktop only — also shown on mobile)**
-- Purpose: Quick reference for instructor assignments
-- Source: Dozenten + Kurse (count courses per dozent via applookup)
-- Fields shown: Full name (vorname + nachname), Fachgebiet as a muted badge, count of assigned courses
-- Style: Compact list rows with name, fachgebiet badge, course count
-- Sort: By nachname alphabetically
-- Limit: Show all
+**Dozenten Table/List**
+- Purpose: Manage instructor records
+- Source: Dozenten app
+- Fields shown: Vorname, Nachname, E-Mail, Telefon, Fachgebiet
+- Mobile style: Simple list with name + fachgebiet
+- Desktop style: Table
+- Sort: By Nachname alphabetically
 
-**Räume (Desktop only — also shown on mobile)**
-- Purpose: Room utilization overview
-- Source: Räume + Kurse (count courses per raum via applookup)
-- Fields shown: Raumname, Gebäude, Kapazität, count of assigned courses
-- Style: Compact list rows
-- Sort: By raumname alphabetically
-- Limit: Show all
+**Räume Table/List**
+- Purpose: Manage room records
+- Source: Räume app
+- Fields shown: Raumname, Gebäude, Kapazität
+- Mobile style: Simple list
+- Desktop style: Table
+- Sort: By Gebäude, then Raumname
+
+**Teilnehmer Table/List**
+- Purpose: Manage participant records
+- Source: Teilnehmer app
+- Fields shown: Vorname, Nachname, E-Mail, Telefon, Geburtsdatum
+- Mobile style: Simple list with name + email
+- Desktop style: Table
+- Sort: By Nachname alphabetically
+
+**Anmeldungen Table/List**
+- Purpose: Manage all registrations
+- Source: Anmeldungen app, enriched with Teilnehmer and Kurs names
+- Fields shown: Teilnehmer (resolved name), Kurs (resolved title), Anmeldedatum, Bezahlt (toggle/badge)
+- Mobile style: List with status badge
+- Desktop style: Table
+- Sort: By Anmeldedatum (newest first)
+
+**Letzte Anmeldungen (Recent - Sidebar)**
+- Purpose: Quick view of recent activity
+- Source: Anmeldungen app (sorted by anmeldedatum, newest first)
+- Fields shown: Teilnehmer name, Kurs title, Anmeldedatum, Bezahlt badge
+- Style: Compact list items (both mobile and desktop)
+- Limit: 8 items
 
 ### Primary Action Button (REQUIRED!)
 
-- **Label:** "Neue Anmeldung"
+- **Label:** Neue Anmeldung
 - **Action:** add_record
 - **Target app:** Anmeldungen
-- **What data:** A dialog/modal form with:
-  - **Teilnehmer** — Select dropdown populated from Teilnehmer records (show "Vorname Nachname"). Required.
-  - **Kurs** — Select dropdown populated from Kurse records (show titel). Required.
-  - **Anmeldedatum** — Date input, defaults to today. Required.
-  - **Bezahlt** — Checkbox, defaults to false.
-  - Submit button: "Anmeldung speichern"
-  - On success: close dialog, refresh all data, show success toast
-  - On error: show error message in dialog
-- **Mobile position:** bottom_fixed — a full-width button pinned to the bottom of the viewport
-- **Desktop position:** header — inline in the top header bar, right-aligned
-- **Why this action:** Registering participants is the daily bread-and-butter task. Every phone call or email results in creating a registration. One-tap access is essential.
+- **What data:** Teilnehmer (select from Teilnehmer app), Kurs (select from Kurse app), Anmeldedatum (date, default today), Bezahlt (checkbox, default false)
+- **Mobile position:** bottom_fixed
+- **Desktop position:** header (top-right)
+- **Why this action:** Registering a participant for a course is the single most frequent action. When someone calls or emails, the admin needs to do this immediately.
+
+### CRUD Operations Per App (REQUIRED!)
+
+**Kurse CRUD Operations**
+
+- **Create (Erstellen):**
+  - **Trigger:** "Neuen Kurs erstellen" button above the Kurse table/list
+  - **Form fields:** Titel (text input), Beschreibung (textarea), Startdatum (date input), Enddatum (date input), Maximale Teilnehmerzahl (number input), Preis EUR (number input), Dozent (select dropdown from Dozenten app - show "Vorname Nachname"), Raum (select dropdown from Räume app - show "Raumname - Gebäude")
+  - **Form style:** Dialog/Modal
+  - **Required fields:** Titel, Startdatum
+  - **Default values:** Startdatum = today, Enddatum = today + 7 days
+
+- **Read (Anzeigen):**
+  - **List view:** Table on desktop, cards on mobile
+  - **Detail view:** Click on course row → Edit dialog opens pre-filled
+  - **Fields shown in list:** Titel, Dozent, Raum, Datum, Auslastung, Preis
+  - **Fields shown in detail:** All fields
+  - **Sort:** By Startdatum (upcoming first)
+  - **Filter/Search:** Text filter on Titel
+
+- **Update (Bearbeiten):**
+  - **Trigger:** Pencil icon on table row (desktop) / tap card then edit button (mobile)
+  - **Edit style:** Same dialog as Create but pre-filled with current values
+  - **Editable fields:** All fields
+
+- **Delete (Löschen):**
+  - **Trigger:** Trash icon on table row (desktop) / delete button in detail sheet (mobile)
+  - **Confirmation:** AlertDialog with warning
+  - **Confirmation text:** "Möchtest du den Kurs '{titel}' wirklich löschen? Alle zugehörigen Anmeldungen bleiben bestehen."
+
+**Räume CRUD Operations**
+
+- **Create:** "Neuen Raum erstellen" button → Dialog with fields: Raumname (text), Gebäude (text), Kapazität (number)
+- **Read:** Table on desktop, list on mobile. Fields: Raumname, Gebäude, Kapazität. Sort by Gebäude.
+- **Update:** Pencil icon → Same dialog pre-filled
+- **Delete:** Trash icon → Confirmation "Möchtest du den Raum '{raumname}' wirklich löschen?"
+
+**Dozenten CRUD Operations**
+
+- **Create:** "Neuen Dozenten erstellen" button → Dialog with fields: Vorname (text), Nachname (text), E-Mail (email input), Telefon (tel input), Fachgebiet (text)
+- **Read:** Table on desktop, list on mobile. Fields: Name (Vorname + Nachname), E-Mail, Telefon, Fachgebiet. Sort by Nachname.
+- **Update:** Pencil icon → Same dialog pre-filled
+- **Delete:** Trash icon → Confirmation "Möchtest du den Dozenten '{vorname} {nachname}' wirklich löschen?"
+
+**Teilnehmer CRUD Operations**
+
+- **Create:** "Neuen Teilnehmer erstellen" button → Dialog with fields: Vorname (text), Nachname (text), E-Mail (email input), Telefon (tel input), Geburtsdatum (date input)
+- **Read:** Table on desktop, list on mobile. Fields: Name, E-Mail, Telefon, Geburtsdatum. Sort by Nachname.
+- **Update:** Pencil icon → Same dialog pre-filled
+- **Delete:** Trash icon → Confirmation "Möchtest du den Teilnehmer '{vorname} {nachname}' wirklich löschen?"
+
+**Anmeldungen CRUD Operations**
+
+- **Create:** Primary action button "Neue Anmeldung" → Dialog with fields: Teilnehmer (select from Teilnehmer app), Kurs (select from Kurse app), Anmeldedatum (date, default today), Bezahlt (checkbox)
+- **Read:** Table on desktop, list on mobile. Fields: Teilnehmer (resolved), Kurs (resolved), Anmeldedatum, Bezahlt. Sort by Anmeldedatum (newest first).
+- **Update:** Pencil icon → Same dialog pre-filled. Bezahlt can also be toggled directly via a switch in the table.
+- **Delete:** Trash icon → Confirmation "Möchtest du die Anmeldung von '{teilnehmer}' für '{kurs}' wirklich löschen?"
 
 ---
 
 ## 7. Visual Details
 
 ### Border Radius
-Rounded (8px) — `--radius: 0.5rem`. Feels approachable without being childish. Cards use `rounded-xl` (12px) for a slightly softer look.
+Rounded (8px) - `--radius: 0.5rem` - professional and modern without being too playful
 
 ### Shadows
-Subtle — cards use `shadow-sm` (`0 1px 2px hsl(0 0% 0% / 0.05)`). On hover, cards lift to `shadow-md` (`0 4px 6px hsl(0 0% 0% / 0.07)`). The fixed mobile action button has a stronger shadow: `0 4px 12px hsl(234 62% 46% / 0.3)`.
+Subtle - Cards use `shadow-sm` (0 1px 2px rgba(0,0,0,0.05)). On hover, cards elevate to `shadow-md`. No heavy drop shadows anywhere.
 
 ### Spacing
-Spacious — 24px gap between major sections, 16px padding inside cards, 12px gap between grid items. The hero card gets 32px padding on desktop to breathe. Page has 16px horizontal padding on mobile, 32px on desktop (within the max-width container).
+Normal - 16px gaps between cards, 24px between sections, 12px internal card padding. Desktop gets 24px gaps between major columns.
 
 ### Animations
-- **Page load:** Stagger fade-in. Cards appear with a 50ms stagger delay, fading in from opacity 0 to 1 and translating up 8px over 300ms with ease-out.
-- **Hover effects:** Cards lift with shadow transition (200ms ease). Stat numbers can have a brief countUp animation on load (optional, only if simple to implement).
-- **Tap feedback:** Buttons use `active:scale-[0.98]` for tactile feel.
+- **Page load:** Subtle fade-in (opacity 0→1 over 300ms)
+- **Hover effects:** Cards lift slightly with shadow transition (150ms ease). Table rows get muted background. Buttons darken slightly.
+- **Tap feedback:** Buttons scale down slightly (scale 0.98) on active state
 
 ---
 
@@ -281,29 +362,29 @@ Spacious — 24px gap between major sections, 16px padding inside cards, 12px ga
 ```css
 :root {
   --radius: 0.5rem;
-  --background: hsl(40 33% 97%);
-  --foreground: hsl(230 25% 18%);
+  --background: hsl(216 25% 97%);
+  --foreground: hsl(220 20% 14%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(230 25% 18%);
+  --card-foreground: hsl(220 20% 14%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(230 25% 18%);
-  --primary: hsl(234 62% 46%);
+  --popover-foreground: hsl(220 20% 14%);
+  --primary: hsl(32 95% 52%);
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(40 20% 94%);
-  --secondary-foreground: hsl(230 25% 18%);
-  --muted: hsl(40 20% 94%);
-  --muted-foreground: hsl(230 10% 48%);
-  --accent: hsl(38 92% 50%);
-  --accent-foreground: hsl(230 25% 18%);
-  --destructive: hsl(0 72% 51%);
-  --border: hsl(40 18% 88%);
-  --input: hsl(40 18% 88%);
-  --ring: hsl(234 62% 46%);
-  --chart-1: hsl(234 62% 46%);
-  --chart-2: hsl(152 60% 40%);
-  --chart-3: hsl(38 92% 50%);
-  --chart-4: hsl(280 60% 50%);
-  --chart-5: hsl(0 72% 51%);
+  --secondary: hsl(216 18% 93%);
+  --secondary-foreground: hsl(220 20% 14%);
+  --muted: hsl(216 18% 93%);
+  --muted-foreground: hsl(216 10% 52%);
+  --accent: hsl(216 60% 52%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(4 72% 52%);
+  --border: hsl(216 18% 90%);
+  --input: hsl(216 18% 90%);
+  --ring: hsl(32 95% 52%);
+  --chart-1: hsl(32 95% 52%);
+  --chart-2: hsl(152 55% 42%);
+  --chart-3: hsl(216 60% 52%);
+  --chart-4: hsl(280 55% 52%);
+  --chart-5: hsl(4 72% 52%);
 }
 ```
 
@@ -312,16 +393,16 @@ Spacious — 24px gap between major sections, 16px padding inside cards, 12px ga
 ## 9. Implementation Checklist
 
 The implementer should verify:
-- [ ] Font loaded: Plus Jakarta Sans from Google Fonts URL above
+- [ ] Font loaded from URL above (Plus Jakarta Sans with weights 300-800)
 - [ ] All CSS variables copied exactly from Section 8
-- [ ] Mobile layout matches Section 4 (single column, hero gauge, 2x2 stats, chart, list, fixed button)
-- [ ] Desktop layout matches Section 5 (2-column asymmetric, header with action, hero+stats row, chart+activity row, dozenten+räume row)
-- [ ] Hero semicircular gauge is prominent and rendered as SVG
-- [ ] Colors create the warm academic mood described in Section 2
-- [ ] Primary action "Neue Anmeldung" works with dialog form
-- [ ] All 5 apps (Dozenten, Räume, Teilnehmer, Kurse, Anmeldungen) are used
-- [ ] Payment status badges use green/red coloring
-- [ ] Bar chart shows enrollment vs. capacity per course
-- [ ] Loading states use Skeleton components
-- [ ] Error states show friendly message with retry
-- [ ] Empty states show helpful guidance
+- [ ] Mobile layout matches Section 4 (hero → KPI chips → course cards → registrations → fixed CTA)
+- [ ] Desktop layout matches Section 5 (two-column asymmetric with tabs)
+- [ ] Hero element is prominent as described (large enrollment count)
+- [ ] Colors create the warm-amber-on-cool-slate mood described in Section 2
+- [ ] Every app has full CRUD (Create, Read, Update, Delete) implemented
+- [ ] CRUD patterns are consistent across all apps (dialog style, button placement)
+- [ ] Delete confirmations are in place for all apps
+- [ ] Capacity progress bars with color gradient on course items
+- [ ] Applookup fields resolve to display names (Dozent → name, Raum → name, etc.)
+- [ ] Date formatting uses dd.MM.yyyy for display, YYYY-MM-DD for API
+- [ ] Toast feedback on all CRUD operations
