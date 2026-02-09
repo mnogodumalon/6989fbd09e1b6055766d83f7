@@ -1,0 +1,11 @@
+{
+  "sessions": [
+    {
+      "id": "1af8d435-a5e4-477b-abc8-3652d1d8074f",
+      "name": "2026-02-09 16:07 - Initial build: Kursverwaltung",
+      "created_at": "2026-02-09T16:07:15.551736Z",
+      "last_used": "2026-02-09T16:07:15.551736Z"
+    }
+  ],
+  "active_session": "1af8d435-a5e4-477b-abc8-3652d1d8074f"
+}
