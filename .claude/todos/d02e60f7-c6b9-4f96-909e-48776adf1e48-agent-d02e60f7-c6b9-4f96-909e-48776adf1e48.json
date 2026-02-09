@@ -1,0 +1,32 @@
+[
+  {
+    "content": "Create design_brief.md for Kursverwaltung dashboard",
+    "status": "completed",
+    "activeForm": "Creating design_brief.md for Kursverwaltung dashboard"
+  },
+  {
+    "content": "Update index.css with theme CSS variables from design brief",
+    "status": "completed",
+    "activeForm": "Updating index.css with theme CSS variables"
+  },
+  {
+    "content": "Update index.html with font and lang settings",
+    "status": "completed",
+    "activeForm": "Updating index.html with font and lang settings"
+  },
+  {
+    "content": "Implement Dashboard.tsx following design_brief.md exactly",
+    "status": "completed",
+    "activeForm": "Implementing Dashboard.tsx"
+  },
+  {
+    "content": "Build project and fix any errors",
+    "status": "completed",
+    "activeForm": "Building project and fixing errors"
+  },
+  {
+    "content": "Deploy to GitHub",
+    "status": "in_progress",
+    "activeForm": "Deploying to GitHub"
+  }
+]

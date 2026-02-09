@@ -1,0 +1,1137 @@
+2026-02-09T20:21:24.102Z [ERROR] Failed to save config with lock: Error: ENOENT: no such file or directory, lstat '/home/user/app/.claude.json'
+2026-02-09T20:21:24.103Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668484103
+2026-02-09T20:21:24.103Z [DEBUG] Setting permissions for new file: 600
+2026-02-09T20:21:24.105Z [DEBUG] Temp file written successfully, size: 50 bytes
+2026-02-09T20:21:24.105Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668484103 to /home/user/app/.claude.json
+2026-02-09T20:21:24.105Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:24.105Z [DEBUG] [init] configureGlobalMTLS starting
+2026-02-09T20:21:24.105Z [DEBUG] [init] configureGlobalMTLS complete
+2026-02-09T20:21:24.105Z [DEBUG] [init] configureGlobalAgents starting
+2026-02-09T20:21:24.105Z [DEBUG] [init] configureGlobalAgents complete
+2026-02-09T20:21:24.107Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668484107
+2026-02-09T20:21:24.107Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:24.149Z [DEBUG] Temp file written successfully, size: 130 bytes
+2026-02-09T20:21:24.149Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:24.149Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668484107 to /home/user/app/.claude.json
+2026-02-09T20:21:24.149Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:24.152Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668484152
+2026-02-09T20:21:24.152Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:24.153Z [DEBUG] Temp file written successfully, size: 167 bytes
+2026-02-09T20:21:24.153Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:24.153Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668484152 to /home/user/app/.claude.json
+2026-02-09T20:21:24.153Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:24.154Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668484154
+2026-02-09T20:21:24.154Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:24.154Z [DEBUG] Temp file written successfully, size: 202 bytes
+2026-02-09T20:21:24.154Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:24.154Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668484154 to /home/user/app/.claude.json
+2026-02-09T20:21:24.154Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:24.155Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668484155
+2026-02-09T20:21:24.155Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:24.156Z [DEBUG] Temp file written successfully, size: 238 bytes
+2026-02-09T20:21:24.156Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:24.156Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668484155 to /home/user/app/.claude.json
+2026-02-09T20:21:24.156Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:24.157Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668484157
+2026-02-09T20:21:24.157Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:24.158Z [DEBUG] Temp file written successfully, size: 275 bytes
+2026-02-09T20:21:24.158Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:24.158Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668484157 to /home/user/app/.claude.json
+2026-02-09T20:21:24.158Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:24.183Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-02-09T20:21:24.201Z [DEBUG] [ToolSearch:optimistic] mode=tst-auto, ENABLE_TOOL_SEARCH=undefined, result=true
+2026-02-09T20:21:24.203Z [DEBUG] [STARTUP] Running setup()...
+2026-02-09T20:21:24.203Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-02-09T20:21:24.208Z [DEBUG] [claudeai-mcp] Checking gate (cached)...
+2026-02-09T20:21:24.208Z [DEBUG] [claudeai-mcp] Gate returned: false
+2026-02-09T20:21:24.208Z [DEBUG] [claudeai-mcp] Disabled via gate
+2026-02-09T20:21:24.209Z [DEBUG] Loading skills from: managed=/etc/claude-code/.claude/skills, user=/home/user/app/.claude/skills, project=[]
+2026-02-09T20:21:24.223Z [ERROR] Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'
+    at openSync (unknown)
+    at <anonymous> (/$bunfs/root/claude:12:947)
+    at tJ (/$bunfs/root/claude:11:49132)
+    at readSync (/$bunfs/root/claude:12:875)
+    at eJ (/$bunfs/root/claude:6110:113)
+    at $J (/$bunfs/root/claude:6112:226)
+    at e$A (/$bunfs/root/claude:175:25568)
+    at yD$ (/$bunfs/root/claude:175:25731)
+    at y_0 (/$bunfs/root/claude:176:1202)
+    at ZAH (/$bunfs/root/claude:176:2080)
+2026-02-09T20:21:24.224Z [ERROR] Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'
+    at openSync (unknown)
+    at <anonymous> (/$bunfs/root/claude:12:947)
+    at tJ (/$bunfs/root/claude:11:49132)
+    at readSync (/$bunfs/root/claude:12:875)
+    at eJ (/$bunfs/root/claude:6110:113)
+    at $J (/$bunfs/root/claude:6112:226)
+    at e$A (/$bunfs/root/claude:175:25568)
+    at yD$ (/$bunfs/root/claude:175:25731)
+    at y_0 (/$bunfs/root/claude:176:1202)
+    at ZAH (/$bunfs/root/claude:176:2080)
+2026-02-09T20:21:24.224Z [ERROR] Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'
+    at openSync (unknown)
+    at <anonymous> (/$bunfs/root/claude:12:947)
+    at tJ (/$bunfs/root/claude:11:49132)
+    at readSync (/$bunfs/root/claude:12:875)
+    at eJ (/$bunfs/root/claude:6110:113)
+    at $J (/$bunfs/root/claude:6112:226)
+    at e$A (/$bunfs/root/claude:175:25568)
+    at wPA (/$bunfs/root/claude:1861:20822)
+    at yID (/$bunfs/root/claude:1861:21727)
+    at <anonymous> (/$bunfs/root/claude:7467:510)
+2026-02-09T20:21:24.224Z [ERROR] Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'
+    at openSync (unknown)
+    at <anonymous> (/$bunfs/root/claude:12:947)
+    at tJ (/$bunfs/root/claude:11:49132)
+    at readSync (/$bunfs/root/claude:12:875)
+    at eJ (/$bunfs/root/claude:6110:113)
+    at $J (/$bunfs/root/claude:6112:226)
+    at e$A (/$bunfs/root/claude:175:25568)
+    at yD$ (/$bunfs/root/claude:175:25731)
+    at ZI (/$bunfs/root/claude:175:27468)
+    at fTH (/$bunfs/root/claude:316:1160)
+2026-02-09T20:21:24.224Z [ERROR] Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'
+    at openSync (unknown)
+    at <anonymous> (/$bunfs/root/claude:12:947)
+    at tJ (/$bunfs/root/claude:11:49132)
+    at readSync (/$bunfs/root/claude:12:875)
+    at eJ (/$bunfs/root/claude:6110:113)
+    at $J (/$bunfs/root/claude:6112:226)
+    at e$A (/$bunfs/root/claude:175:25568)
+    at yD$ (/$bunfs/root/claude:175:25731)
+    at ZI (/$bunfs/root/claude:175:27468)
+    at BTH (/$bunfs/root/claude:316:1765)
+2026-02-09T20:21:24.224Z [ERROR] Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'
+    at openSync (unknown)
+    at <anonymous> (/$bunfs/root/claude:12:947)
+    at tJ (/$bunfs/root/claude:11:49132)
+    at readSync (/$bunfs/root/claude:12:875)
+    at eJ (/$bunfs/root/claude:6110:113)
+    at $J (/$bunfs/root/claude:6112:226)
+    at e$A (/$bunfs/root/claude:175:25568)
+    at yD$ (/$bunfs/root/claude:175:25731)
+    at ZI (/$bunfs/root/claude:175:27468)
+    at y5A (/$bunfs/root/claude:886:34317)
+    at async <anonymous> (/$bunfs/root/claude:7491:2216)
+2026-02-09T20:21:24.224Z [DEBUG] Error log sink initialized
+2026-02-09T20:21:24.224Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2026-02-09T20:21:24.224Z [DEBUG] Total plugin skills loaded: 0
+2026-02-09T20:21:24.224Z [DEBUG] Total plugin commands loaded: 0
+2026-02-09T20:21:24.246Z [DEBUG] [STARTUP] setup() completed in 43ms
+2026-02-09T20:21:24.246Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-02-09T20:21:24.247Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-02-09T20:21:24.248Z [DEBUG] Total plugin agents loaded: 0
+2026-02-09T20:21:24.248Z [DEBUG] Loaded 0 unique skills (managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-02-09T20:21:24.250Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills, 2 bundled skills
+2026-02-09T20:21:24.250Z [DEBUG] [STARTUP] Commands and agents loaded in 4ms
+2026-02-09T20:21:24.251Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-02-09T20:21:24.251Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-02-09T20:21:24.251Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-02-09T20:21:24.253Z [DEBUG] Total LSP servers loaded: 0
+2026-02-09T20:21:24.253Z [DEBUG] [STARTUP] MCP configs loaded in 70ms
+2026-02-09T20:21:24.253Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-02-09T20:21:24.253Z [DEBUG] LSP manager initialized with 0 servers
+2026-02-09T20:21:24.253Z [DEBUG] LSP server manager initialized successfully
+2026-02-09T20:21:24.253Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-02-09T20:21:24.262Z [ERROR] Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'
+    at openSync (unknown)
+    at <anonymous> (/$bunfs/root/claude:12:947)
+    at tJ (/$bunfs/root/claude:11:49132)
+    at readSync (/$bunfs/root/claude:12:875)
+    at eJ (/$bunfs/root/claude:6110:113)
+    at $J (/$bunfs/root/claude:6112:226)
+    at e$A (/$bunfs/root/claude:175:25568)
+    at yD$ (/$bunfs/root/claude:175:25731)
+    at ZI (/$bunfs/root/claude:175:27468)
+    at lj1 (/$bunfs/root/claude:7462:281)
+2026-02-09T20:21:24.263Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-02-09T20:21:24.263Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-02-09T20:21:24.265Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:25.630Z [DEBUG] Writing to temp file: /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668485630
+2026-02-09T20:21:25.631Z [DEBUG] Temp file written successfully, size: 2 bytes
+2026-02-09T20:21:25.631Z [DEBUG] Renaming /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668485630 to /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json
+2026-02-09T20:21:25.631Z [DEBUG] File /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json written atomically
+2026-02-09T20:21:25.632Z [ERROR] "Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'\n    at openSync (unknown)\n    at <anonymous> (/$bunfs/root/claude:12:947)\n    at tJ (/$bunfs/root/claude:11:49132)\n    at readSync (/$bunfs/root/claude:12:875)\n    at eJ (/$bunfs/root/claude:6110:113)\n    at $J (/$bunfs/root/claude:6112:226)\n    at e$A (/$bunfs/root/claude:175:25568)\n    at yD$ (/$bunfs/root/claude:175:25731)\n    at ZI (/$bunfs/root/claude:175:27468)\n    at dg (/$bunfs/root/claude:886:34433)"
+2026-02-09T20:21:25.692Z [ERROR] "Error: Error: ENOENT: no such file or directory, open '/home/user/app/.claude/remote-settings.json'\n    at openSync (unknown)\n    at <anonymous> (/$bunfs/root/claude:12:947)\n    at tJ (/$bunfs/root/claude:11:49132)\n    at readSync (/$bunfs/root/claude:12:875)\n    at eJ (/$bunfs/root/claude:6110:113)\n    at $J (/$bunfs/root/claude:6112:226)\n    at e$A (/$bunfs/root/claude:175:25568)\n    at yD$ (/$bunfs/root/claude:175:25731)\n    at ZI (/$bunfs/root/claude:175:27468)\n    at dg (/$bunfs/root/claude:886:34433)\n    at async LS1 (/$bunfs/root/claude:6378:1896)\n    at async MMB (/$bunfs/root/claude:6361:813)"
+2026-02-09T20:21:25.692Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2026-02-09T20:21:25.692Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:25.692Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2026-02-09T20:21:25.693Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:25.693Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:25.700Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:25.720Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485720
+2026-02-09T20:21:25.720Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.721Z [DEBUG] Temp file written successfully, size: 347 bytes
+2026-02-09T20:21:25.721Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.721Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485720 to /home/user/app/.claude.json
+2026-02-09T20:21:25.721Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.722Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485722
+2026-02-09T20:21:25.722Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.723Z [DEBUG] Temp file written successfully, size: 375 bytes
+2026-02-09T20:21:25.723Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.723Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485722 to /home/user/app/.claude.json
+2026-02-09T20:21:25.723Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.724Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485724
+2026-02-09T20:21:25.724Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.725Z [DEBUG] Temp file written successfully, size: 427 bytes
+2026-02-09T20:21:25.725Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.725Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485724 to /home/user/app/.claude.json
+2026-02-09T20:21:25.725Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.725Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485725
+2026-02-09T20:21:25.725Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.726Z [DEBUG] Temp file written successfully, size: 567 bytes
+2026-02-09T20:21:25.726Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.726Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485725 to /home/user/app/.claude.json
+2026-02-09T20:21:25.726Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.727Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485727
+2026-02-09T20:21:25.727Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.727Z [DEBUG] Temp file written successfully, size: 610 bytes
+2026-02-09T20:21:25.727Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.727Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485727 to /home/user/app/.claude.json
+2026-02-09T20:21:25.727Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.728Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485728
+2026-02-09T20:21:25.728Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.729Z [DEBUG] Temp file written successfully, size: 649 bytes
+2026-02-09T20:21:25.729Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.729Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485728 to /home/user/app/.claude.json
+2026-02-09T20:21:25.729Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.730Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485730
+2026-02-09T20:21:25.730Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.730Z [DEBUG] Temp file written successfully, size: 688 bytes
+2026-02-09T20:21:25.730Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.730Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485730 to /home/user/app/.claude.json
+2026-02-09T20:21:25.730Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.731Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485731
+2026-02-09T20:21:25.731Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.731Z [DEBUG] Temp file written successfully, size: 726 bytes
+2026-02-09T20:21:25.731Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.731Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485731 to /home/user/app/.claude.json
+2026-02-09T20:21:25.731Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.732Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485732
+2026-02-09T20:21:25.732Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.733Z [DEBUG] Temp file written successfully, size: 758 bytes
+2026-02-09T20:21:25.733Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.733Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485732 to /home/user/app/.claude.json
+2026-02-09T20:21:25.733Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.734Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485734
+2026-02-09T20:21:25.734Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.734Z [DEBUG] Temp file written successfully, size: 788 bytes
+2026-02-09T20:21:25.734Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.734Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485734 to /home/user/app/.claude.json
+2026-02-09T20:21:25.734Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.735Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485735
+2026-02-09T20:21:25.735Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.735Z [DEBUG] Temp file written successfully, size: 821 bytes
+2026-02-09T20:21:25.735Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.735Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485735 to /home/user/app/.claude.json
+2026-02-09T20:21:25.735Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.736Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485736
+2026-02-09T20:21:25.736Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.736Z [DEBUG] Temp file written successfully, size: 873 bytes
+2026-02-09T20:21:25.736Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.736Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485736 to /home/user/app/.claude.json
+2026-02-09T20:21:25.736Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.737Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485737
+2026-02-09T20:21:25.737Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.737Z [DEBUG] Temp file written successfully, size: 909 bytes
+2026-02-09T20:21:25.737Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.737Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485737 to /home/user/app/.claude.json
+2026-02-09T20:21:25.737Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.738Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485738
+2026-02-09T20:21:25.738Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.738Z [DEBUG] Temp file written successfully, size: 939 bytes
+2026-02-09T20:21:25.738Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.738Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485738 to /home/user/app/.claude.json
+2026-02-09T20:21:25.738Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.739Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485739
+2026-02-09T20:21:25.739Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.740Z [DEBUG] Temp file written successfully, size: 963 bytes
+2026-02-09T20:21:25.740Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.740Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485739 to /home/user/app/.claude.json
+2026-02-09T20:21:25.740Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.740Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485740
+2026-02-09T20:21:25.740Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.741Z [DEBUG] Temp file written successfully, size: 999 bytes
+2026-02-09T20:21:25.741Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.741Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485740 to /home/user/app/.claude.json
+2026-02-09T20:21:25.741Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.742Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485742
+2026-02-09T20:21:25.742Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.742Z [DEBUG] Temp file written successfully, size: 1031 bytes
+2026-02-09T20:21:25.742Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.742Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485742 to /home/user/app/.claude.json
+2026-02-09T20:21:25.742Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.743Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485743
+2026-02-09T20:21:25.743Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.744Z [DEBUG] Temp file written successfully, size: 1066 bytes
+2026-02-09T20:21:25.744Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.744Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485743 to /home/user/app/.claude.json
+2026-02-09T20:21:25.744Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.744Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485744
+2026-02-09T20:21:25.744Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.745Z [DEBUG] Temp file written successfully, size: 1098 bytes
+2026-02-09T20:21:25.745Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.745Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485744 to /home/user/app/.claude.json
+2026-02-09T20:21:25.745Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.746Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485746
+2026-02-09T20:21:25.746Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.746Z [DEBUG] Temp file written successfully, size: 1144 bytes
+2026-02-09T20:21:25.746Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.746Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485746 to /home/user/app/.claude.json
+2026-02-09T20:21:25.746Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.747Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485747
+2026-02-09T20:21:25.747Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.748Z [DEBUG] Temp file written successfully, size: 1186 bytes
+2026-02-09T20:21:25.748Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.748Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485747 to /home/user/app/.claude.json
+2026-02-09T20:21:25.748Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.748Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485748
+2026-02-09T20:21:25.748Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.749Z [DEBUG] Temp file written successfully, size: 1231 bytes
+2026-02-09T20:21:25.749Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.749Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485748 to /home/user/app/.claude.json
+2026-02-09T20:21:25.749Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.750Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485750
+2026-02-09T20:21:25.750Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.750Z [DEBUG] Temp file written successfully, size: 1275 bytes
+2026-02-09T20:21:25.750Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.750Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485750 to /home/user/app/.claude.json
+2026-02-09T20:21:25.750Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.755Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485755
+2026-02-09T20:21:25.755Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.755Z [DEBUG] Temp file written successfully, size: 1308 bytes
+2026-02-09T20:21:25.755Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.755Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485755 to /home/user/app/.claude.json
+2026-02-09T20:21:25.755Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.755Z [DEBUG] Org penguin mode: enabled
+2026-02-09T20:21:25.755Z [DEBUG] Remote settings: No settings found (404)
+2026-02-09T20:21:25.756Z [DEBUG] Programmatic settings change notification for policySettings
+2026-02-09T20:21:25.756Z [DEBUG] Plugin hooks: reloading due to policySettings change
+2026-02-09T20:21:25.756Z [DEBUG] Settings changed from policySettings, updating app state
+2026-02-09T20:21:25.757Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-02-09T20:21:25.757Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-02-09T20:21:25.768Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-02-09T20:21:25.770Z [DEBUG] Policy limits: Fetched successfully
+2026-02-09T20:21:25.771Z [DEBUG] Watching for changes in skill/command directories: /home/user/app/.claude/skills, /home/user/app/.claude/skills...
+2026-02-09T20:21:25.832Z [DEBUG] Total plugin output styles loaded: 0
+2026-02-09T20:21:25.832Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:25.851Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485851
+2026-02-09T20:21:25.851Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.852Z [DEBUG] Temp file written successfully, size: 1343 bytes
+2026-02-09T20:21:25.852Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.852Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485851 to /home/user/app/.claude.json
+2026-02-09T20:21:25.852Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.852Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485852
+2026-02-09T20:21:25.852Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.853Z [DEBUG] Temp file written successfully, size: 1420 bytes
+2026-02-09T20:21:25.853Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.853Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485852 to /home/user/app/.claude.json
+2026-02-09T20:21:25.853Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.856Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485856
+2026-02-09T20:21:25.856Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.856Z [DEBUG] Temp file written successfully, size: 1451 bytes
+2026-02-09T20:21:25.856Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.856Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485856 to /home/user/app/.claude.json
+2026-02-09T20:21:25.857Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.857Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485857
+2026-02-09T20:21:25.857Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.858Z [DEBUG] Temp file written successfully, size: 1498 bytes
+2026-02-09T20:21:25.858Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.858Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485857 to /home/user/app/.claude.json
+2026-02-09T20:21:25.858Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.859Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:21:25.859Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:21:25.859Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:21:25.859Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:21:25.861Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485861
+2026-02-09T20:21:25.861Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.862Z [DEBUG] Temp file written successfully, size: 1536 bytes
+2026-02-09T20:21:25.862Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.862Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485861 to /home/user/app/.claude.json
+2026-02-09T20:21:25.862Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.862Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-02-09T20:21:25.862Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:25.862Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-02-09T20:21:25.864Z [DEBUG] autocompact: tokens=65 threshold=167000 effectiveWindow=180000
+2026-02-09T20:21:25.864Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485864
+2026-02-09T20:21:25.864Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.865Z [DEBUG] Temp file written successfully, size: 1574 bytes
+2026-02-09T20:21:25.865Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.865Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485864 to /home/user/app/.claude.json
+2026-02-09T20:21:25.865Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.866Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485866
+2026-02-09T20:21:25.866Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.867Z [DEBUG] Temp file written successfully, size: 1619 bytes
+2026-02-09T20:21:25.867Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.867Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485866 to /home/user/app/.claude.json
+2026-02-09T20:21:25.867Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.870Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485870
+2026-02-09T20:21:25.870Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.870Z [DEBUG] Temp file written successfully, size: 1686 bytes
+2026-02-09T20:21:25.870Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.870Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485870 to /home/user/app/.claude.json
+2026-02-09T20:21:25.871Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.872Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.37.3a3; cc_entrypoint=sdk-py; cch=00000;
+2026-02-09T20:21:25.873Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:25.873Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:25.873Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485873
+2026-02-09T20:21:25.873Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.874Z [DEBUG] Temp file written successfully, size: 1725 bytes
+2026-02-09T20:21:25.874Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.874Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485873 to /home/user/app/.claude.json
+2026-02-09T20:21:25.874Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:25.874Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:25.875Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:25.875Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:25.875Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668485875
+2026-02-09T20:21:25.875Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:21:25.876Z [DEBUG] Temp file written successfully, size: 1753 bytes
+2026-02-09T20:21:25.876Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:25.876Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668485875 to /home/user/app/.claude.json
+2026-02-09T20:21:25.876Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:21:27.690Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:21:29.038Z [DEBUG] Skill tool validation error: Unknown skill: frontend-design
+2026-02-09T20:21:29.039Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:21:29.039Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:21:29.039Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:21:29.039Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:21:29.039Z [DEBUG] autocompact: tokens=19898 threshold=167000 effectiveWindow=180000
+2026-02-09T20:21:29.045Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:29.045Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:29.045Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:29.046Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:29.046Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:30.582Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:21:31.738Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:31.738Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:31.738Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:31.738Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:31.743Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:31.743Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:31.743Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:32.236Z [DEBUG] executePreToolHooks called for tool: Glob
+2026-02-09T20:21:32.236Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2026-02-09T20:21:32.236Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:32.236Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2026-02-09T20:21:32.460Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=/usr/local/lib/python3.14/site-packages/claude_agent_sdk/_bundled/claude)
+2026-02-09T20:21:32.570Z [DEBUG] executePreToolHooks called for tool: Glob
+2026-02-09T20:21:32.570Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2026-02-09T20:21:32.570Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:32.570Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2026-02-09T20:21:32.601Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2026-02-09T20:21:32.601Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:32.601Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2026-02-09T20:21:32.748Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2026-02-09T20:21:32.748Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:32.748Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2026-02-09T20:21:32.848Z [DEBUG] executePreToolHooks called for tool: Glob
+2026-02-09T20:21:32.848Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2026-02-09T20:21:32.848Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:32.848Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2026-02-09T20:21:33.019Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2026-02-09T20:21:33.019Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:33.019Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2026-02-09T20:21:33.118Z [DEBUG] executePreToolHooks called for tool: Glob
+2026-02-09T20:21:33.118Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2026-02-09T20:21:33.118Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:33.118Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2026-02-09T20:21:33.284Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2026-02-09T20:21:33.284Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:33.284Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2026-02-09T20:21:33.286Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:21:33.286Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:21:33.286Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:21:33.286Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:21:33.287Z [DEBUG] autocompact: tokens=25568 threshold=167000 effectiveWindow=180000
+2026-02-09T20:21:33.290Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:33.290Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:33.291Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:33.291Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:33.291Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:34.910Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:21:35.848Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:35.848Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:35.848Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:35.848Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:35.851Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:35.851Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:35.851Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:36.229Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:36.229Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:36.229Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:36.229Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:36.231Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:36.231Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:36.231Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:36.547Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:36.547Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:36.547Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:36.571Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:36.571Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:36.571Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:36.571Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:36.574Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:36.574Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:36.574Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:36.943Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:36.943Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:36.943Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:36.943Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:36.946Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:36.946Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:36.946Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:37.329Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:37.329Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:37.329Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:37.329Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:37.331Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:37.331Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:37.331Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:37.721Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:37.721Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:37.721Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:37.721Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:37.723Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:37.723Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:37.723Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:37.745Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:21:37.745Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:21:37.745Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:21:37.745Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:21:37.746Z [DEBUG] autocompact: tokens=52114 threshold=167000 effectiveWindow=180000
+2026-02-09T20:21:37.750Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:37.750Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:37.750Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:37.751Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:37.751Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:40.369Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:21:41.745Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:41.745Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:41.745Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:41.745Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:41.747Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:41.747Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:41.747Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:42.081Z [DEBUG] executePreToolHooks called for tool: Glob
+2026-02-09T20:21:42.081Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2026-02-09T20:21:42.081Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:42.081Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2026-02-09T20:21:42.250Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2026-02-09T20:21:42.250Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:42.250Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2026-02-09T20:21:42.252Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:21:42.252Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:21:42.252Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:21:42.252Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:21:42.252Z [DEBUG] autocompact: tokens=62108 threshold=167000 effectiveWindow=180000
+2026-02-09T20:21:42.256Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:42.256Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:42.257Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:42.257Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:42.257Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:44.233Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:21:44.567Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:44.567Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:44.567Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:44.567Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:44.569Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:44.569Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:44.569Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:45.003Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:21:45.003Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:21:45.003Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:45.003Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:21:45.006Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:21:45.006Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:45.006Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:21:45.014Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:21:45.014Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:21:45.014Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:21:45.014Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:21:45.015Z [DEBUG] autocompact: tokens=66651 threshold=167000 effectiveWindow=180000
+2026-02-09T20:21:45.021Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:45.021Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:45.021Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:45.021Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:45.021Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:46.898Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:21:51.265Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2026-02-09T20:21:51.265Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2026-02-09T20:21:51.265Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:21:51.265Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:21:51.267Z [DEBUG] Writing to temp file: /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668511267
+2026-02-09T20:21:51.267Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:21:51.267Z [DEBUG] Temp file written successfully, size: 932 bytes
+2026-02-09T20:21:51.267Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:21:51.267Z [DEBUG] Renaming /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668511267 to /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json
+2026-02-09T20:21:51.267Z [DEBUG] File /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json written atomically
+2026-02-09T20:21:51.269Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2026-02-09T20:21:51.269Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:21:51.269Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:21:51.277Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:21:51.277Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:21:51.277Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:21:51.277Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:21:51.279Z [DEBUG] autocompact: tokens=68021 threshold=167000 effectiveWindow=180000
+2026-02-09T20:21:51.307Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:21:51.307Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:21:51.307Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:51.308Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:21:51.308Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:21:53.011Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:23:39.129Z [WARN] Streaming stall detected: 105.1s gap between events (stall #1)
+2026-02-09T20:23:40.227Z [DEBUG] executePreToolHooks called for tool: Write
+2026-02-09T20:23:40.228Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2026-02-09T20:23:40.228Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:23:40.228Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2026-02-09T20:23:40.246Z [WARN] Streaming completed with 1 stall(s), total stall time: 105.1s
+2026-02-09T20:23:41.231Z [DEBUG] rg error (signal=undefined, code=ABORT_ERR, stderr: ), 141 results
+2026-02-09T20:23:41.231Z [ERROR] "AbortError: AbortError: The operation was aborted.\n    at unknown\n    at abortChildProcess (node:child_process:935:42)\n    at onAbortListener2 (node:child_process:35:24)\n    at abort (unknown)\n    at <anonymous> (/$bunfs/root/claude:6114:2200)"
+2026-02-09T20:23:41.233Z [DEBUG] Writing to temp file: /home/user/app/design_brief.md.tmp.388.1770668621233
+2026-02-09T20:23:41.234Z [DEBUG] Temp file written successfully, size: 18138 bytes
+2026-02-09T20:23:41.234Z [DEBUG] Renaming /home/user/app/design_brief.md.tmp.388.1770668621233 to /home/user/app/design_brief.md
+2026-02-09T20:23:41.234Z [DEBUG] File /home/user/app/design_brief.md written atomically
+2026-02-09T20:23:41.236Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2026-02-09T20:23:41.236Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:23:41.236Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2026-02-09T20:23:41.239Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:23:41.239Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:23:41.239Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:23:41.239Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:23:41.240Z [DEBUG] autocompact: tokens=73421 threshold=167000 effectiveWindow=180000
+2026-02-09T20:23:41.246Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:23:41.246Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:23:41.246Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:23:41.246Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:23:41.246Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:23:43.972Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:23:47.612Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2026-02-09T20:23:47.612Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2026-02-09T20:23:47.612Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:23:47.612Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:23:47.614Z [DEBUG] Writing to temp file: /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668627614
+2026-02-09T20:23:47.614Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:23:47.615Z [DEBUG] Temp file written successfully, size: 934 bytes
+2026-02-09T20:23:47.615Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:23:47.616Z [DEBUG] Renaming /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668627614 to /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json
+2026-02-09T20:23:47.616Z [DEBUG] File /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json written atomically
+2026-02-09T20:23:47.616Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2026-02-09T20:23:47.616Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:23:47.616Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:23:47.632Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:23:47.632Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:23:47.632Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:23:47.632Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:23:47.634Z [DEBUG] autocompact: tokens=73739 threshold=167000 effectiveWindow=180000
+2026-02-09T20:23:47.644Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:23:47.644Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:23:47.653Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:23:47.653Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:23:47.654Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:23:49.963Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:01.333Z [DEBUG] Edit tool validation error: File has not been read yet. Read it first before writing to it.
+2026-02-09T20:24:03.610Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:03.610Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:03.610Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:03.610Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:03.611Z [DEBUG] autocompact: tokens=75290 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:03.617Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:03.617Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:03.617Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:03.617Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:03.618Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:05.743Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:06.046Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:24:06.047Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:24:06.047Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:06.047Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:24:06.049Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:24:06.049Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:06.049Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:24:06.065Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:06.065Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:06.065Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:06.065Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:06.065Z [DEBUG] autocompact: tokens=76755 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:06.070Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:06.070Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:06.070Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:06.071Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:06.071Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:08.544Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:17.910Z [DEBUG] executePreToolHooks called for tool: Write
+2026-02-09T20:24:17.910Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2026-02-09T20:24:17.910Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:17.910Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2026-02-09T20:24:17.912Z [DEBUG] Writing to temp file: /home/user/app/src/index.css.tmp.388.1770668657912
+2026-02-09T20:24:17.912Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:24:17.913Z [DEBUG] Temp file written successfully, size: 2912 bytes
+2026-02-09T20:24:17.913Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:24:17.913Z [DEBUG] Renaming /home/user/app/src/index.css.tmp.388.1770668657912 to /home/user/app/src/index.css
+2026-02-09T20:24:17.913Z [DEBUG] File /home/user/app/src/index.css written atomically
+2026-02-09T20:24:17.918Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668657918
+2026-02-09T20:24:17.918Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:24:17.918Z [DEBUG] Temp file written successfully, size: 1797 bytes
+2026-02-09T20:24:17.918Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:24:17.918Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668657918 to /home/user/app/.claude.json
+2026-02-09T20:24:17.918Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:24:17.918Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2026-02-09T20:24:17.918Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:17.918Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2026-02-09T20:24:19.428Z [DEBUG] executePreToolHooks called for tool: Write
+2026-02-09T20:24:19.429Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2026-02-09T20:24:19.429Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:19.429Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2026-02-09T20:24:19.430Z [DEBUG] Writing to temp file: /home/user/app/index.html.tmp.388.1770668659430
+2026-02-09T20:24:19.430Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:24:19.430Z [DEBUG] Temp file written successfully, size: 499 bytes
+2026-02-09T20:24:19.430Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:24:19.430Z [DEBUG] Renaming /home/user/app/index.html.tmp.388.1770668659430 to /home/user/app/index.html
+2026-02-09T20:24:19.430Z [DEBUG] File /home/user/app/index.html written atomically
+2026-02-09T20:24:19.433Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2026-02-09T20:24:19.433Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:19.433Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2026-02-09T20:24:19.451Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:19.451Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:19.451Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:19.451Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:19.452Z [DEBUG] autocompact: tokens=80356 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:19.458Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:19.458Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:19.458Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:19.458Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:19.459Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:22.191Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:25.789Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2026-02-09T20:24:25.789Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2026-02-09T20:24:25.789Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:25.789Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:24:25.790Z [DEBUG] Writing to temp file: /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668665790
+2026-02-09T20:24:25.790Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:24:25.790Z [DEBUG] Temp file written successfully, size: 938 bytes
+2026-02-09T20:24:25.790Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:24:25.790Z [DEBUG] Renaming /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668665790 to /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json
+2026-02-09T20:24:25.791Z [DEBUG] File /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json written atomically
+2026-02-09T20:24:25.791Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2026-02-09T20:24:25.791Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:25.791Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:24:25.811Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:25.811Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:25.811Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:25.811Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:25.812Z [DEBUG] autocompact: tokens=81419 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:25.815Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:25.815Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:25.816Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:25.816Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:25.816Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:28.870Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:30.598Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:24:30.598Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:24:30.598Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:30.598Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:24:30.600Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:24:30.600Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:30.600Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:24:31.596Z [DEBUG] executePreToolHooks called for tool: Grep
+2026-02-09T20:24:31.596Z [DEBUG] Getting matching hook commands for PreToolUse with query: Grep
+2026-02-09T20:24:31.596Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:31.596Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2026-02-09T20:24:31.749Z [DEBUG] Getting matching hook commands for PostToolUse with query: Grep
+2026-02-09T20:24:31.749Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:31.749Z [DEBUG] Matched 1 unique hooks for query "Grep" (1 before deduplication)
+2026-02-09T20:24:31.986Z [DEBUG] executePreToolHooks called for tool: Glob
+2026-02-09T20:24:31.986Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2026-02-09T20:24:31.986Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:31.986Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2026-02-09T20:24:32.154Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2026-02-09T20:24:32.154Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:32.154Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2026-02-09T20:24:32.339Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:24:32.339Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:24:32.339Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:32.339Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:24:32.342Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:24:32.342Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:32.342Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:24:32.359Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:32.359Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:32.359Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:32.359Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:32.360Z [DEBUG] autocompact: tokens=84083 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:32.367Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:32.367Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:32.367Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:32.367Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:32.368Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:34.408Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:36.509Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-09T20:24:36.509Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-09T20:24:36.509Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:36.509Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:36.537Z [DEBUG] tree-sitter: loaded from embedded
+2026-02-09T20:24:36.568Z [DEBUG] Creating shell snapshot for bash (/bin/bash)
+2026-02-09T20:24:36.568Z [DEBUG] Looking for shell config file: /home/user/app/.bashrc
+2026-02-09T20:24:36.568Z [DEBUG] Shell config file not found: /home/user/app/.bashrc, creating snapshot with Claude Code defaults only
+2026-02-09T20:24:36.568Z [DEBUG] Snapshots directory: /home/user/app/.claude/shell-snapshots
+2026-02-09T20:24:36.569Z [DEBUG] Creating snapshot at: /home/user/app/.claude/shell-snapshots/snapshot-bash-1770668676568-u47qyx.sh
+2026-02-09T20:24:36.569Z [DEBUG] Shell binary exists: true
+2026-02-09T20:24:36.569Z [DEBUG] Execution timeout: 10000ms
+2026-02-09T20:24:36.573Z [DEBUG] Shell snapshot created successfully (392 bytes)
+2026-02-09T20:24:36.574Z [DEBUG] No session environment scripts found
+2026-02-09T20:24:36.594Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-09T20:24:36.595Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:36.595Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:36.595Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:36.595Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2026-02-09T20:24:36.595Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:36.595Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:36.596Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:36.596Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:36.598Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:36.598Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:36.598Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:36.598Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:36.599Z [DEBUG] autocompact: tokens=85639 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:36.605Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:36.605Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:36.605Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:36.605Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:36.605Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:37.761Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:38.790Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:39.385Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-09T20:24:39.385Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-09T20:24:39.385Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:39.385Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:39.402Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-09T20:24:39.402Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:39.402Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:39.402Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:39.402Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2026-02-09T20:24:39.402Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:39.402Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:39.402Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:39.403Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:39.539Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:39.539Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:39.539Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:39.539Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:39.540Z [DEBUG] autocompact: tokens=86331 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:39.543Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:39.544Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:39.544Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:39.544Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:39.544Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:40.092Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:41.286Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:43.055Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:24:43.055Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:24:43.055Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:43.055Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:24:43.057Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:24:43.057Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:43.057Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:24:43.483Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:24:43.483Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:24:43.483Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:43.483Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:24:43.484Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:24:43.484Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:43.484Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:24:43.893Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:24:43.893Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:24:43.893Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:43.893Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:24:43.895Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:24:43.895Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:43.895Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:24:43.908Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:43.908Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:43.908Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:43.908Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:43.909Z [DEBUG] autocompact: tokens=90321 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:43.915Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:43.915Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:43.916Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:43.916Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:43.916Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:45.972Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:48.247Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-09T20:24:48.247Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-09T20:24:48.247Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:48.248Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:48.310Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-09T20:24:48.310Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:48.310Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:48.310Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:48.310Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2026-02-09T20:24:48.310Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:48.310Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:48.310Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:48.310Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:48.312Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:48.312Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:48.312Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:48.312Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:48.312Z [DEBUG] autocompact: tokens=91766 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:48.316Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:48.316Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:48.316Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:48.316Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:48.316Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:49.120Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:50.305Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:50.766Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-09T20:24:50.766Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-09T20:24:50.766Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:24:50.766Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:50.776Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-09T20:24:50.776Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:50.776Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:50.777Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:50.777Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2026-02-09T20:24:50.777Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:24:50.777Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:24:50.777Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:50.777Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:50.815Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:24:50.815Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:24:50.815Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:24:50.815Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:24:50.815Z [DEBUG] autocompact: tokens=91859 threshold=167000 effectiveWindow=180000
+2026-02-09T20:24:50.819Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:24:50.819Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:24:50.819Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:50.819Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:24:50.819Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:24:51.410Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:24:53.044Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:26:25.955Z [DEBUG] Metrics opt-out API response: enabled=true, vcsLinking=false
+2026-02-09T20:26:26.123Z [DEBUG] BigQuery metrics exported successfully
+2026-02-09T20:26:26.123Z [DEBUG] "BigQuery API Response: {\n  \"accepted_count\": 12,\n  \"rejected_count\": 0\n}"
+2026-02-09T20:27:34.569Z [WARN] Streaming stall detected: 161.2s gap between events (stall #1)
+2026-02-09T20:27:36.858Z [DEBUG] executePreToolHooks called for tool: Write
+2026-02-09T20:27:36.858Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2026-02-09T20:27:36.858Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:27:36.858Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2026-02-09T20:27:36.863Z [DEBUG] Writing to temp file: /home/user/app/src/pages/Dashboard.tsx.tmp.388.1770668856863
+2026-02-09T20:27:36.864Z [DEBUG] Temp file written successfully, size: 59594 bytes
+2026-02-09T20:27:36.864Z [DEBUG] Renaming /home/user/app/src/pages/Dashboard.tsx.tmp.388.1770668856863 to /home/user/app/src/pages/Dashboard.tsx
+2026-02-09T20:27:36.864Z [DEBUG] File /home/user/app/src/pages/Dashboard.tsx written atomically
+2026-02-09T20:27:36.867Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2026-02-09T20:27:36.867Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:27:36.867Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2026-02-09T20:27:36.905Z [WARN] Streaming completed with 1 stall(s), total stall time: 161.2s
+2026-02-09T20:27:36.907Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:27:36.907Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:27:36.907Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:27:36.907Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:27:36.908Z [DEBUG] autocompact: tokens=110201 threshold=167000 effectiveWindow=180000
+2026-02-09T20:27:36.915Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:27:36.915Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:27:36.915Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:36.916Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:27:36.916Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:39.780Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:27:42.011Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:27:42.012Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:27:42.012Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:27:42.012Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:27:42.014Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:27:42.014Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:27:42.014Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:27:42.036Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:27:42.036Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:27:42.036Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:27:42.036Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:27:42.037Z [DEBUG] autocompact: tokens=110462 threshold=167000 effectiveWindow=180000
+2026-02-09T20:27:42.041Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:27:42.041Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:27:42.041Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:42.041Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:27:42.042Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:44.426Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:27:45.626Z [DEBUG] executePreToolHooks called for tool: Write
+2026-02-09T20:27:45.626Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2026-02-09T20:27:45.626Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:27:45.627Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2026-02-09T20:27:45.628Z [DEBUG] Writing to temp file: /home/user/app/src/App.tsx.tmp.388.1770668865628
+2026-02-09T20:27:45.628Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:27:45.629Z [DEBUG] Temp file written successfully, size: 237 bytes
+2026-02-09T20:27:45.629Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:27:45.629Z [DEBUG] Renaming /home/user/app/src/App.tsx.tmp.388.1770668865628 to /home/user/app/src/App.tsx
+2026-02-09T20:27:45.629Z [DEBUG] File /home/user/app/src/App.tsx written atomically
+2026-02-09T20:27:45.630Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2026-02-09T20:27:45.630Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:27:45.630Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2026-02-09T20:27:45.646Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:27:45.646Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:27:45.646Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:27:45.646Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:27:45.648Z [DEBUG] autocompact: tokens=110759 threshold=167000 effectiveWindow=180000
+2026-02-09T20:27:45.658Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:27:45.658Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:27:45.658Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:45.658Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:27:45.658Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:47.883Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:27:52.068Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2026-02-09T20:27:52.068Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2026-02-09T20:27:52.068Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:27:52.068Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:27:52.069Z [DEBUG] Writing to temp file: /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668872069
+2026-02-09T20:27:52.069Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:27:52.070Z [DEBUG] Temp file written successfully, size: 940 bytes
+2026-02-09T20:27:52.070Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:27:52.070Z [DEBUG] Renaming /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668872069 to /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json
+2026-02-09T20:27:52.070Z [DEBUG] File /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json written atomically
+2026-02-09T20:27:52.070Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2026-02-09T20:27:52.070Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:27:52.070Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:27:52.079Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:27:52.079Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:27:52.079Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:27:52.079Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:27:52.080Z [DEBUG] autocompact: tokens=111129 threshold=167000 effectiveWindow=180000
+2026-02-09T20:27:52.084Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:27:52.084Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:27:52.085Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:52.085Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:27:52.085Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:54.308Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:27:55.202Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-09T20:27:55.203Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-09T20:27:55.203Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:27:55.203Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:27:55.208Z [DEBUG] Writing to temp file: /home/user/app/.claude.json.tmp.388.1770668875208
+2026-02-09T20:27:55.208Z [DEBUG] Preserving file permissions: 100600
+2026-02-09T20:27:55.208Z [DEBUG] Temp file written successfully, size: 1826 bytes
+2026-02-09T20:27:55.208Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:27:55.208Z [DEBUG] Renaming /home/user/app/.claude.json.tmp.388.1770668875208 to /home/user/app/.claude.json
+2026-02-09T20:27:55.208Z [DEBUG] File /home/user/app/.claude.json written atomically
+2026-02-09T20:27:55.209Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-09T20:27:55.209Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-09T20:27:55.210Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:27:55.210Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:27:55.210Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:27:55.210Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:27:55.210Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:55.211Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:55.211Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:27:55.211Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:27:55.212Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:55.212Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:27:55.628Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:27:55.641Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:28:02.556Z [DEBUG] Bash tool error (6818ms): Shell command failed
+2026-02-09T20:28:02.557Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2026-02-09T20:28:02.557Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:28:02.557Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:28:02.557Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:28:02.557Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:28:02.557Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:28:02.557Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:28:02.558Z [DEBUG] autocompact: tokens=111677 threshold=167000 effectiveWindow=180000
+2026-02-09T20:28:02.563Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:28:02.563Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:28:02.563Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:02.563Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:28:02.563Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:04.695Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:28:05.846Z [DEBUG] executePreToolHooks called for tool: Read
+2026-02-09T20:28:05.846Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2026-02-09T20:28:05.846Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:28:05.846Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2026-02-09T20:28:05.848Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2026-02-09T20:28:05.848Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:28:05.848Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2026-02-09T20:28:05.892Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:28:05.892Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:28:05.892Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:28:05.892Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:28:05.893Z [DEBUG] autocompact: tokens=112397 threshold=167000 effectiveWindow=180000
+2026-02-09T20:28:05.898Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:28:05.898Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:28:05.898Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:05.898Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:28:05.899Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:07.986Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:28:09.884Z [DEBUG] executePreToolHooks called for tool: Edit
+2026-02-09T20:28:09.884Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2026-02-09T20:28:09.884Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:28:09.884Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2026-02-09T20:28:09.896Z [DEBUG] Writing to temp file: /home/user/app/src/pages/Dashboard.tsx.tmp.388.1770668889896
+2026-02-09T20:28:09.896Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:28:09.897Z [DEBUG] Temp file written successfully, size: 59602 bytes
+2026-02-09T20:28:09.897Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:28:09.897Z [DEBUG] Renaming /home/user/app/src/pages/Dashboard.tsx.tmp.388.1770668889896 to /home/user/app/src/pages/Dashboard.tsx
+2026-02-09T20:28:09.897Z [DEBUG] File /home/user/app/src/pages/Dashboard.tsx written atomically
+2026-02-09T20:28:09.911Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2026-02-09T20:28:09.911Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:28:09.911Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2026-02-09T20:28:09.916Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:28:09.916Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:28:09.916Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:28:09.916Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:28:09.918Z [DEBUG] autocompact: tokens=112695 threshold=167000 effectiveWindow=180000
+2026-02-09T20:28:09.924Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:28:09.924Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:28:09.924Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:09.924Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:28:09.925Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:12.081Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:28:12.849Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-09T20:28:12.849Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-09T20:28:12.849Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:28:12.849Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:28:24.537Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-09T20:28:24.538Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:28:24.538Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:28:24.538Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:24.538Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2026-02-09T20:28:24.538Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:28:24.538Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-09T20:28:24.538Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:28:24.538Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:24.540Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:28:24.540Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:28:24.540Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:28:24.540Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:28:24.541Z [DEBUG] autocompact: tokens=113007 threshold=167000 effectiveWindow=180000
+2026-02-09T20:28:24.547Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:28:24.547Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:28:24.547Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:24.547Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:28:24.547Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:25.717Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:28:26.431Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:28:29.394Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2026-02-09T20:28:29.394Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2026-02-09T20:28:29.394Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:28:29.394Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:28:29.394Z [DEBUG] Writing to temp file: /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668909394
+2026-02-09T20:28:29.394Z [DEBUG] Preserving file permissions: 100644
+2026-02-09T20:28:29.396Z [DEBUG] Temp file written successfully, size: 942 bytes
+2026-02-09T20:28:29.396Z [DEBUG] Applied original permissions to temp file
+2026-02-09T20:28:29.396Z [DEBUG] Renaming /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json.tmp.388.1770668909394 to /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json
+2026-02-09T20:28:29.396Z [DEBUG] File /home/user/app/.claude/todos/d02e60f7-c6b9-4f96-909e-48776adf1e48-agent-d02e60f7-c6b9-4f96-909e-48776adf1e48.json written atomically
+2026-02-09T20:28:29.397Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2026-02-09T20:28:29.397Z [DEBUG] Found 5 hook matchers in settings
+2026-02-09T20:28:29.397Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2026-02-09T20:28:29.459Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-09T20:28:29.459Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-09T20:28:29.459Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-09T20:28:29.459Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-09T20:28:29.460Z [DEBUG] autocompact: tokens=113430 threshold=167000 effectiveWindow=180000
+2026-02-09T20:28:29.463Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-09T20:28:29.463Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-09T20:28:29.463Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:29.464Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-09T20:28:29.464Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-02-09T20:28:31.681Z [DEBUG] Stream started - received first chunk
+2026-02-09T20:28:32.537Z [DEBUG] executePreToolHooks called for tool: mcp__deploy_tools__deploy_to_github
+2026-02-09T20:28:32.537Z [DEBUG] Getting matching hook commands for PreToolUse with query: mcp__deploy_tools__deploy_to_github
+2026-02-09T20:28:32.537Z [DEBUG] Found 0 hook matchers in settings
+2026-02-09T20:28:32.537Z [DEBUG] Matched 0 unique hooks for query "mcp__deploy_tools__deploy_to_github" (0 before deduplication)
+2026-02-09T20:28:32.537Z [DEBUG] MCP server "deploy_tools": Calling MCP tool: deploy_to_github

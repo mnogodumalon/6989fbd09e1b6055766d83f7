@@ -38,8 +38,7 @@
     ],
     "tengu_attribution_header": false,
     "tengu_workout2": true,
-    "tengu_file_write_optimization": false,
-    "tengu_cork_m4q": false
+    "tengu_file_write_optimization": false
   },
   "firstStartTime": "2026-02-09T20:21:24.102Z",
   "userID": "c9863d86cfc736c20a388432662631f6fc040b7b935f7a71f147e704a5a56bae",
