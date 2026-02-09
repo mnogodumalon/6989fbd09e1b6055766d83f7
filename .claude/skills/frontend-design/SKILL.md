@@ -523,7 +523,59 @@ This dashboard is a **full data management tool**, not just a read-only display.
 
 ---
 
-## 7. Visual Details
+## 7. Navigation (React Router)
+
+**⚠️ The dashboard MUST use React Router for navigation between apps.**
+
+Each app gets its own page/route. The dashboard is NOT a single scrollable page with everything crammed together - it is a **multi-page app** where users navigate between different views.
+
+### Navigation Structure
+
+Describe the navigation layout:
+
+- **Navigation style:** [Sidebar (desktop) + Bottom tabs (mobile) | Top tabs | Sidebar only]
+- **Dashboard/Home route:** [What does the landing page show? Overview KPIs, summary across all apps?]
+
+### Routes
+
+Define a route for each app:
+
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | Dashboard Overview | Summary KPIs, hero element, quick actions across all apps |
+| `/[app-name]` | [App Name] | Full CRUD view for this app (list, create, edit, delete) |
+| `/[app-name-2]` | [App Name 2] | Full CRUD view for this app |
+| ... | ... | ... |
+
+### Navigation Design
+
+**Desktop:**
+[Describe how navigation works on desktop:
+- Sidebar with app icons/names? Fixed or collapsible?
+- Which nav item is highlighted for the active route?
+- Where does the app title/breadcrumb appear?]
+
+**Mobile:**
+[Describe how navigation works on mobile:
+- Bottom tab bar with icons?
+- How many tabs? (max 5 recommended for mobile)
+- Which icon represents each app?
+- Where does the page title appear?]
+
+### Active Route Indicator
+[How is the currently active page highlighted in the navigation?
+E.g. "Active tab has primary color background with white text, inactive tabs are muted"]
+
+### Dashboard Overview Page (/)
+[The home/landing page should show:
+- Summary KPIs aggregated across apps
+- Quick action buttons for the most common operations
+- Recent activity or latest entries
+- Links/cards to navigate to individual app pages]
+
+---
+
+## 8. Visual Details
 
 ### Border Radius
 [sharp (4px) / rounded (8px) / pill (16px+)]
@@ -536,12 +588,13 @@ This dashboard is a **full data management tool**, not just a read-only display.
 
 ### Animations
 - **Page load:** [none / fade / stagger]
+- **Page transitions:** [none / fade / slide - what happens when navigating between routes?]
 - **Hover effects:** [What happens on hover?]
 - **Tap feedback:** [What happens on tap?]
 
 ---
 
-## 8. CSS Variables (Copy Exactly!)
+## 9. CSS Variables (Copy Exactly!)
 
 The implementer MUST copy these values exactly into `src/index.css`:
 
@@ -570,7 +623,7 @@ The implementer MUST copy these values exactly into `src/index.css`:
 
 ---
 
-## 9. Implementation Checklist
+## 10. Implementation Checklist
 
 The implementer should verify:
 - [ ] Font loaded from URL above
@@ -579,7 +632,9 @@ The implementer should verify:
 - [ ] Desktop layout matches Section 5
 - [ ] Hero element is prominent as described
 - [ ] Colors create the mood described in Section 2
-- [ ] Every app has full CRUD (Create, Read, Update, Delete) implemented
+- [ ] React Router navigation implemented with all routes from Section 7
+- [ ] Each app has its own page/route with full CRUD
+- [ ] Navigation works on both mobile (bottom tabs) and desktop (sidebar/tabs)
 - [ ] CRUD patterns are consistent across all apps
 - [ ] Delete confirmations are in place
 ```
@@ -637,6 +692,13 @@ Before finalizing design_brief.md:
 - [ ] Is mobile designed FOR mobile (not just smaller)?
 - [ ] Does desktop use horizontal space meaningfully?
 - [ ] Would this get featured in the App Store?
+
+### Navigation & Routing
+- [ ] Is React Router navigation defined with routes for every app?
+- [ ] Does the Dashboard Overview page (/) provide a useful summary?
+- [ ] Is mobile navigation designed (bottom tabs)?
+- [ ] Is desktop navigation designed (sidebar/top tabs)?
+- [ ] Is the active route indicator clearly defined?
 
 ### Interactivity & CRUD
 - [ ] Is the primary action clearly defined?

@@ -37,10 +37,11 @@
       "haiku"
     ],
     "tengu_attribution_header": false,
-    "tengu_workout2": true
+    "tengu_workout2": true,
+    "tengu_file_write_optimization": false
   },
-  "firstStartTime": "2026-02-09T15:58:32.568Z",
-  "userID": "0c3ec30ddf010014512879acb8bb46107b46111c669d3b797e888a34f6dc453c",
+  "firstStartTime": "2026-02-09T16:14:54.997Z",
+  "userID": "c0852d35419611b98ed0d5ce1ea8392fd9be4726f8266dd59be60b183dbcbdf5",
   "sonnet45MigrationComplete": true,
   "opus45MigrationComplete": true,
   "opusProMigrationComplete": true,
@@ -48,6 +49,6 @@
   "penguinModeOrgEnabled": true,
   "clientDataCache": {
     "data": null,
-    "timestamp": 1770652714139
+    "timestamp": 1770653696702
   }
 }
