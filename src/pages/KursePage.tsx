@@ -1,288 +1,400 @@
-import { useState, useEffect, useMemo } from 'react'
-import type { Kurse, Dozenten, Raeume, Anmeldungen, Teilnehmer } from '@/types/app'
-import { APP_IDS } from '@/types/app'
-import { LivingAppsService, extractRecordId, createRecordUrl } from '@/services/livingAppsService'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { DeleteConfirmDialog } from '@/components/DeleteConfirmDialog'
-import { AnmeldungDialog } from '@/components/AnmeldungDialog'
-import { Plus, Pencil, Trash2, AlertCircle, UserPlus } from 'lucide-react'
-import { format, parseISO } from 'date-fns'
-import { de } from 'date-fns/locale'
-import { toast } from 'sonner'
+import { useState, useEffect, useMemo } from 'react';
+import type { Kurse, Dozenten, Raeume, Anmeldungen } from '@/types/app';
+import { LivingAppsService, extractRecordId, createRecordUrl } from '@/services/livingAppsService';
+import { APP_IDS } from '@/types/app';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Plus, Pencil, Trash2, AlertCircle } from 'lucide-react';
+import { format, parseISO } from 'date-fns';
+import { de } from 'date-fns/locale';
+import { toast } from 'sonner';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
+function formatCurrency(value: number | null | undefined): string {
+  if (value == null) return '-';
+  return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value);
+}
 
 export function KursePage() {
-  const [kurse, setKurse] = useState<Kurse[]>([])
-  const [dozenten, setDozenten] = useState<Dozenten[]>([])
-  const [raeume, setRaeume] = useState<Raeume[]>([])
-  const [anmeldungen, setAnmeldungen] = useState<Anmeldungen[]>([])
-  const [teilnehmer, setTeilnehmer] = useState<Teilnehmer[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
-  const [editRecord, setEditRecord] = useState<Kurse | null>(null)
-  const [showCreateDialog, setShowCreateDialog] = useState(false)
-  const [deleteRecord, setDeleteRecord] = useState<Kurse | null>(null)
-  const [detailRecord, setDetailRecord] = useState<Kurse | null>(null)
-  const [showAnmeldungDialog, setShowAnmeldungDialog] = useState(false)
+  const [kurse, setKurse] = useState<Kurse[]>([]);
+  const [dozenten, setDozenten] = useState<Dozenten[]>([]);
+  const [raeume, setRaeume] = useState<Raeume[]>([]);
+  const [anmeldungen, setAnmeldungen] = useState<Anmeldungen[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [showCreate, setShowCreate] = useState(false);
+  const [editRecord, setEditRecord] = useState<Kurse | null>(null);
+  const [deleteRecord, setDeleteRecord] = useState<Kurse | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
-  async function loadData() {
+  async function refreshData() {
     try {
-      setLoading(true)
-      setError(null)
-      const [k, d, r, a, t] = await Promise.all([
+      setLoading(true);
+      setError(null);
+      const [k, d, r, a] = await Promise.all([
         LivingAppsService.getKurse(),
         LivingAppsService.getDozenten(),
         LivingAppsService.getRaeume(),
         LivingAppsService.getAnmeldungen(),
-        LivingAppsService.getTeilnehmer(),
-      ])
-      setKurse(k)
-      setDozenten(d)
-      setRaeume(r)
-      setAnmeldungen(a)
-      setTeilnehmer(t)
+      ]);
+      setKurse(k);
+      setDozenten(d);
+      setRaeume(r);
+      setAnmeldungen(a);
     } catch (err) {
-      setError(err instanceof Error ? err : new Error('Fehler beim Laden'))
+      setError(err instanceof Error ? err : new Error('Unbekannter Fehler'));
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
-  useEffect(() => { loadData() }, [])
+  useEffect(() => { refreshData(); }, []);
 
   const dozentMap = useMemo(() => {
-    const map = new Map<string, Dozenten>()
-    dozenten.forEach(d => map.set(d.record_id, d))
-    return map
-  }, [dozenten])
+    const m = new Map<string, Dozenten>();
+    dozenten.forEach((d) => m.set(d.record_id, d));
+    return m;
+  }, [dozenten]);
 
   const raumMap = useMemo(() => {
-    const map = new Map<string, Raeume>()
-    raeume.forEach(r => map.set(r.record_id, r))
-    return map
-  }, [raeume])
-
-  const teilnehmerMap = useMemo(() => {
-    const map = new Map<string, Teilnehmer>()
-    teilnehmer.forEach(t => map.set(t.record_id, t))
-    return map
-  }, [teilnehmer])
+    const m = new Map<string, Raeume>();
+    raeume.forEach((r) => m.set(r.record_id, r));
+    return m;
+  }, [raeume]);
 
   const anmeldungenPerKurs = useMemo(() => {
-    const counts = new Map<string, Anmeldungen[]>()
-    anmeldungen.forEach(a => {
-      const kursId = extractRecordId(a.fields.kurs)
-      if (!kursId) return
-      if (!counts.has(kursId)) counts.set(kursId, [])
-      counts.get(kursId)!.push(a)
-    })
-    return counts
-  }, [anmeldungen])
-
-  const sortedKurse = useMemo(() => {
-    return [...kurse].sort((a, b) => {
-      const da = a.fields.startdatum || ''
-      const db = b.fields.startdatum || ''
-      return da.localeCompare(db)
-    })
-  }, [kurse])
+    const counts = new Map<string, number>();
+    anmeldungen.forEach((a) => {
+      const kursId = extractRecordId(a.fields.kurs);
+      if (!kursId) return;
+      counts.set(kursId, (counts.get(kursId) || 0) + 1);
+    });
+    return counts;
+  }, [anmeldungen]);
 
   async function handleDelete() {
-    if (!deleteRecord) return
-    await LivingAppsService.deleteKurseEntry(deleteRecord.record_id)
-    setDeleteRecord(null)
-    setDetailRecord(null)
-    loadData()
+    if (!deleteRecord) return;
+    setDeleting(true);
+    try {
+      await LivingAppsService.deleteKurseEntry(deleteRecord.record_id);
+      toast.success(`Kurs "${deleteRecord.fields.titel}" wurde gelöscht.`);
+      setDeleteRecord(null);
+      refreshData();
+    } catch {
+      toast.error('Fehler beim Löschen des Kurses.');
+    } finally {
+      setDeleting(false);
+    }
   }
 
-  if (loading) return <PageLoading />
-  if (error) return <PageError error={error} onRetry={loadData} />
+  if (loading) {
+    return (
+      <div className="space-y-4">
+        <Skeleton className="h-8 w-32" />
+        {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-16 w-full" />)}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-4">
+        <h1 className="text-2xl font-bold">Kurse</h1>
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Fehler</AlertTitle>
+          <AlertDescription className="flex items-center gap-2">
+            {error.message}
+            <Button variant="outline" size="sm" onClick={refreshData}>Erneut versuchen</Button>
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Kurse</h1>
-        <Button onClick={() => setShowCreateDialog(true)}>
-          <Plus className="h-4 w-4 mr-2" /> Neuer Kurs
+        <Button onClick={() => setShowCreate(true)}>
+          <Plus className="h-4 w-4 mr-2" />
+          <span className="hidden sm:inline">Neuen Kurs erstellen</span>
+          <span className="sm:hidden">Neu</span>
         </Button>
       </div>
 
-      {sortedKurse.length === 0 ? (
-        <EmptyState message="Noch keine Kurse vorhanden." actionLabel="Kurs erstellen" onAction={() => setShowCreateDialog(true)} />
+      {kurse.length === 0 ? (
+        <Card>
+          <CardContent className="py-12 text-center">
+            <p className="text-muted-foreground mb-4">Noch keine Kurse vorhanden.</p>
+            <Button onClick={() => setShowCreate(true)}>
+              <Plus className="h-4 w-4 mr-2" /> Ersten Kurs erstellen
+            </Button>
+          </CardContent>
+        </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {sortedKurse.map(k => {
-            const dozentId = extractRecordId(k.fields.dozent)
-            const dozent = dozentId ? dozentMap.get(dozentId) : null
-            const raumId = extractRecordId(k.fields.raum)
-            const raum = raumId ? raumMap.get(raumId) : null
-            const enrolled = anmeldungenPerKurs.get(k.record_id)?.length || 0
-            const max = k.fields.maximale_teilnehmer || 0
-            const fillPercent = max > 0 ? (enrolled / max) * 100 : 0
+        <>
+          {/* Desktop Table */}
+          <div className="hidden md:block">
+            <Card>
+              <CardContent className="p-0">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b text-left text-muted-foreground">
+                      <th className="p-3 font-medium">Titel</th>
+                      <th className="p-3 font-medium">Dozent</th>
+                      <th className="p-3 font-medium">Raum</th>
+                      <th className="p-3 font-medium">Start</th>
+                      <th className="p-3 font-medium">Ende</th>
+                      <th className="p-3 font-medium text-center">Teilnehmer</th>
+                      <th className="p-3 font-medium text-right">Preis</th>
+                      <th className="p-3 font-medium text-right">Aktionen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {kurse.map((k) => {
+                      const dozentId = extractRecordId(k.fields.dozent);
+                      const dozent = dozentId ? dozentMap.get(dozentId) : null;
+                      const raumId = extractRecordId(k.fields.raum);
+                      const raum = raumId ? raumMap.get(raumId) : null;
+                      const enrolled = anmeldungenPerKurs.get(k.record_id) || 0;
+                      const max = k.fields.maximale_teilnehmer;
 
-            return (
-              <Card
-                key={k.record_id}
-                className="cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => setDetailRecord(k)}
-              >
-                <CardContent className="py-4 px-5">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-base truncate">{k.fields.titel || '(Ohne Titel)'}</p>
-                      {k.fields.beschreibung && (
-                        <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{k.fields.beschreibung}</p>
-                      )}
-                      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2 text-xs text-muted-foreground">
-                        {dozent && <span>{dozent.fields.vorname} {dozent.fields.nachname}</span>}
-                        {raum && <span>{raum.fields.raumname}</span>}
-                        {k.fields.startdatum && (
-                          <span>
-                            {format(parseISO(k.fields.startdatum), 'dd.MM.yyyy', { locale: de })}
-                            {k.fields.enddatum && ` – ${format(parseISO(k.fields.enddatum), 'dd.MM.yyyy', { locale: de })}`}
-                          </span>
+                      return (
+                        <tr key={k.record_id} className="border-b last:border-0 hover:bg-muted/50 transition-colors">
+                          <td className="p-3 font-medium">{k.fields.titel || '-'}</td>
+                          <td className="p-3 text-muted-foreground">
+                            {dozent ? `${dozent.fields.vorname || ''} ${dozent.fields.nachname || ''}`.trim() : '-'}
+                          </td>
+                          <td className="p-3 text-muted-foreground">
+                            {raum ? `${raum.fields.raumname || ''}${raum.fields.gebaeude ? ` (${raum.fields.gebaeude})` : ''}` : '-'}
+                          </td>
+                          <td className="p-3">
+                            {k.fields.startdatum ? format(parseISO(k.fields.startdatum), 'dd.MM.yyyy', { locale: de }) : '-'}
+                          </td>
+                          <td className="p-3">
+                            {k.fields.enddatum ? format(parseISO(k.fields.enddatum), 'dd.MM.yyyy', { locale: de }) : '-'}
+                          </td>
+                          <td className="p-3 text-center">
+                            <Badge variant={max && enrolled >= max ? 'destructive' : 'secondary'}>
+                              {enrolled}{max ? `/${max}` : ''}
+                            </Badge>
+                          </td>
+                          <td className="p-3 text-right">{formatCurrency(k.fields.preis)}</td>
+                          <td className="p-3 text-right">
+                            <div className="flex justify-end gap-1">
+                              <Button variant="ghost" size="icon" onClick={() => setEditRecord(k)}>
+                                <Pencil className="h-4 w-4" />
+                              </Button>
+                              <Button variant="ghost" size="icon" onClick={() => setDeleteRecord(k)} className="text-destructive hover:text-destructive">
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Mobile Card List */}
+          <div className="md:hidden space-y-2">
+            {kurse.map((k) => {
+              const dozentId = extractRecordId(k.fields.dozent);
+              const dozent = dozentId ? dozentMap.get(dozentId) : null;
+              const enrolled = anmeldungenPerKurs.get(k.record_id) || 0;
+              const max = k.fields.maximale_teilnehmer;
+
+              return (
+                <Card key={k.record_id}>
+                  <CardContent className="p-3">
+                    <div className="flex items-start justify-between">
+                      <div className="space-y-1 flex-1">
+                        <p className="font-semibold">{k.fields.titel || 'Ohne Titel'}</p>
+                        {dozent && (
+                          <p className="text-sm text-muted-foreground">
+                            {dozent.fields.vorname} {dozent.fields.nachname}
+                          </p>
                         )}
-                        {k.fields.preis != null && (
-                          <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(k.fields.preis)}</span>
-                        )}
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {k.fields.startdatum && (
+                            <span className="text-xs text-muted-foreground">
+                              {format(parseISO(k.fields.startdatum), 'dd.MM.yyyy', { locale: de })}
+                              {k.fields.enddatum && ` - ${format(parseISO(k.fields.enddatum), 'dd.MM.yyyy', { locale: de })}`}
+                            </span>
+                          )}
+                          <Badge variant={max && enrolled >= max ? 'destructive' : 'secondary'} className="text-xs">
+                            {enrolled}{max ? `/${max}` : ''}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="icon" onClick={() => setEditRecord(k)}>
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="icon" onClick={() => setDeleteRecord(k)} className="text-destructive">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       </div>
                     </div>
-                    <Badge variant={fillPercent >= 100 ? 'destructive' : fillPercent >= 80 ? 'secondary' : 'outline'}>
-                      {enrolled}/{max || '∞'}
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </>
       )}
 
-      {/* Create/Edit Dialog */}
+      {/* Create Dialog */}
       <KursDialog
-        open={showCreateDialog || !!editRecord}
-        onOpenChange={open => { if (!open) { setShowCreateDialog(false); setEditRecord(null) } }}
+        open={showCreate}
+        onOpenChange={setShowCreate}
+        record={null}
+        dozenten={dozenten}
+        raeume={raeume}
+        onSuccess={refreshData}
+      />
+
+      {/* Edit Dialog */}
+      <KursDialog
+        open={!!editRecord}
+        onOpenChange={(open) => !open && setEditRecord(null)}
         record={editRecord}
         dozenten={dozenten}
         raeume={raeume}
-        onSuccess={() => {
-          setShowCreateDialog(false)
-          setEditRecord(null)
-          loadData()
-        }}
+        onSuccess={refreshData}
       />
 
-      {/* Detail Dialog */}
-      <KursDetailDialog
-        record={detailRecord}
-        onClose={() => setDetailRecord(null)}
-        dozentMap={dozentMap}
-        raumMap={raumMap}
-        teilnehmerMap={teilnehmerMap}
-        anmeldungen={anmeldungenPerKurs.get(detailRecord?.record_id || '') || []}
-        onEdit={k => { setDetailRecord(null); setEditRecord(k) }}
-        onDelete={k => { setDetailRecord(null); setDeleteRecord(k) }}
-        onAddAnmeldung={() => setShowAnmeldungDialog(true)}
-      />
-
-      {/* Delete Dialog */}
-      <DeleteConfirmDialog
-        open={!!deleteRecord}
-        onOpenChange={open => { if (!open) setDeleteRecord(null) }}
-        recordName={deleteRecord?.fields.titel || ''}
-        onConfirm={handleDelete}
-      />
-
-      {/* Anmeldung Dialog */}
-      <AnmeldungDialog
-        open={showAnmeldungDialog}
-        onOpenChange={setShowAnmeldungDialog}
-        kurse={kurse}
-        teilnehmer={teilnehmer}
-        onSuccess={() => {
-          toast.success('Anmeldung erstellt')
-          loadData()
-        }}
-      />
+      {/* Delete Confirmation */}
+      <AlertDialog open={!!deleteRecord} onOpenChange={(open) => !open && setDeleteRecord(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Kurs löschen?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Kurs &quot;{deleteRecord?.fields.titel || ''}&quot; wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} disabled={deleting} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              {deleting ? 'Löscht...' : 'Löschen'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
-  )
+  );
 }
 
-// --- Kurs Create/Edit Dialog ---
 function KursDialog({
-  open, onOpenChange, record, dozenten, raeume, onSuccess,
+  open,
+  onOpenChange,
+  record,
+  dozenten,
+  raeume,
+  onSuccess,
 }: {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  record: Kurse | null
-  dozenten: Dozenten[]
-  raeume: Raeume[]
-  onSuccess: () => void
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  record: Kurse | null;
+  dozenten: Dozenten[];
+  raeume: Raeume[];
+  onSuccess: () => void;
 }) {
-  const isEditing = !!record
-  const [submitting, setSubmitting] = useState(false)
-  const [formData, setFormData] = useState({
-    titel: '', beschreibung: '', startdatum: '', enddatum: '',
-    maximale_teilnehmer: '', preis: '', dozent: '', raum: '',
-  })
+  const isEditing = !!record;
+  const [submitting, setSubmitting] = useState(false);
+  const [titel, setTitel] = useState('');
+  const [beschreibung, setBeschreibung] = useState('');
+  const [startdatum, setStartdatum] = useState('');
+  const [enddatum, setEnddatum] = useState('');
+  const [maxTeilnehmer, setMaxTeilnehmer] = useState('');
+  const [preis, setPreis] = useState('');
+  const [dozentId, setDozentId] = useState('');
+  const [raumId, setRaumId] = useState('');
 
   useEffect(() => {
     if (open) {
       if (record) {
-        setFormData({
-          titel: record.fields.titel || '',
-          beschreibung: record.fields.beschreibung || '',
-          startdatum: record.fields.startdatum?.split('T')[0] || '',
-          enddatum: record.fields.enddatum?.split('T')[0] || '',
-          maximale_teilnehmer: record.fields.maximale_teilnehmer?.toString() || '',
-          preis: record.fields.preis?.toString() || '',
-          dozent: extractRecordId(record.fields.dozent) || '',
-          raum: extractRecordId(record.fields.raum) || '',
-        })
+        setTitel(record.fields.titel || '');
+        setBeschreibung(record.fields.beschreibung || '');
+        setStartdatum(record.fields.startdatum?.split('T')[0] || '');
+        setEnddatum(record.fields.enddatum?.split('T')[0] || '');
+        setMaxTeilnehmer(record.fields.maximale_teilnehmer?.toString() || '');
+        setPreis(record.fields.preis?.toString() || '');
+        setDozentId(extractRecordId(record.fields.dozent) || '');
+        setRaumId(extractRecordId(record.fields.raum) || '');
       } else {
-        setFormData({
-          titel: '', beschreibung: '', startdatum: new Date().toISOString().split('T')[0],
-          enddatum: '', maximale_teilnehmer: '', preis: '', dozent: '', raum: '',
-        })
+        setTitel('');
+        setBeschreibung('');
+        setStartdatum('');
+        setEnddatum('');
+        setMaxTeilnehmer('');
+        setPreis('');
+        setDozentId('');
+        setRaumId('');
       }
     }
-  }, [open, record])
+  }, [open, record]);
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (!formData.titel.trim()) { toast.error('Bitte einen Kurstitel eingeben.'); return }
-    setSubmitting(true)
+    e.preventDefault();
+    setSubmitting(true);
     try {
-      const apiData: Kurse['fields'] = {
-        titel: formData.titel,
-        beschreibung: formData.beschreibung || undefined,
-        startdatum: formData.startdatum || undefined,
-        enddatum: formData.enddatum || undefined,
-        maximale_teilnehmer: formData.maximale_teilnehmer ? Number(formData.maximale_teilnehmer) : undefined,
-        preis: formData.preis ? Number(formData.preis) : undefined,
-        dozent: formData.dozent ? createRecordUrl(APP_IDS.DOZENTEN, formData.dozent) : undefined,
-        raum: formData.raum ? createRecordUrl(APP_IDS.RAEUME, formData.raum) : undefined,
-      }
+      const fields: Kurse['fields'] = {
+        titel: titel || undefined,
+        beschreibung: beschreibung || undefined,
+        startdatum: startdatum || undefined,
+        enddatum: enddatum || undefined,
+        maximale_teilnehmer: maxTeilnehmer ? Number(maxTeilnehmer) : undefined,
+        preis: preis ? Number(preis) : undefined,
+        dozent: dozentId ? createRecordUrl(APP_IDS.DOZENTEN, dozentId) : undefined,
+        raum: raumId ? createRecordUrl(APP_IDS.RAEUME, raumId) : undefined,
+      };
       if (isEditing) {
-        await LivingAppsService.updateKurseEntry(record!.record_id, apiData)
-        toast.success('Kurs aktualisiert')
+        await LivingAppsService.updateKurseEntry(record!.record_id, fields);
+        toast.success('Kurs wurde aktualisiert.');
       } else {
-        await LivingAppsService.createKurseEntry(apiData)
-        toast.success('Kurs erstellt')
+        await LivingAppsService.createKurseEntry(fields);
+        toast.success('Neuer Kurs wurde erstellt.');
       }
-      onOpenChange(false)
-      onSuccess()
+      onOpenChange(false);
+      onSuccess();
     } catch (err) {
-      toast.error(`Fehler: ${err instanceof Error ? err.message : 'Unbekannter Fehler'}`)
+      toast.error(`Fehler: ${err instanceof Error ? err.message : 'Unbekannter Fehler'}`);
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
   }
 
@@ -290,61 +402,64 @@ function KursDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{isEditing ? 'Kurs bearbeiten' : 'Neuer Kurs'}</DialogTitle>
-          <DialogDescription>{isEditing ? 'Bearbeite die Kursdaten.' : 'Erstelle einen neuen Kurs.'}</DialogDescription>
+          <DialogTitle>{isEditing ? 'Kurs bearbeiten' : 'Neuen Kurs erstellen'}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="titel">Kurstitel *</Label>
-            <Input id="titel" value={formData.titel} onChange={e => setFormData(p => ({ ...p, titel: e.target.value }))} required />
+            <Label htmlFor="kurs-titel">Kurstitel *</Label>
+            <Input id="kurs-titel" value={titel} onChange={(e) => setTitel(e.target.value)} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="beschreibung">Beschreibung</Label>
-            <Textarea id="beschreibung" value={formData.beschreibung} onChange={e => setFormData(p => ({ ...p, beschreibung: e.target.value }))} rows={3} />
+            <Label htmlFor="kurs-beschreibung">Beschreibung</Label>
+            <Textarea id="kurs-beschreibung" value={beschreibung} onChange={(e) => setBeschreibung(e.target.value)} rows={3} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <Label htmlFor="startdatum">Startdatum</Label>
-              <Input id="startdatum" type="date" value={formData.startdatum} onChange={e => setFormData(p => ({ ...p, startdatum: e.target.value }))} />
+              <Label htmlFor="kurs-start">Startdatum</Label>
+              <Input id="kurs-start" type="date" value={startdatum} onChange={(e) => setStartdatum(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="enddatum">Enddatum</Label>
-              <Input id="enddatum" type="date" value={formData.enddatum} onChange={e => setFormData(p => ({ ...p, enddatum: e.target.value }))} />
+              <Label htmlFor="kurs-end">Enddatum</Label>
+              <Input id="kurs-end" type="date" value={enddatum} onChange={(e) => setEnddatum(e.target.value)} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <Label htmlFor="max_tn">Max. Teilnehmer</Label>
-              <Input id="max_tn" type="number" min="0" value={formData.maximale_teilnehmer} onChange={e => setFormData(p => ({ ...p, maximale_teilnehmer: e.target.value }))} />
+              <Label htmlFor="kurs-max">Max. Teilnehmer</Label>
+              <Input id="kurs-max" type="number" min="0" value={maxTeilnehmer} onChange={(e) => setMaxTeilnehmer(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="preis">Preis (EUR)</Label>
-              <Input id="preis" type="number" min="0" step="0.01" value={formData.preis} onChange={e => setFormData(p => ({ ...p, preis: e.target.value }))} />
+              <Label htmlFor="kurs-preis">Preis (EUR)</Label>
+              <Input id="kurs-preis" type="number" min="0" step="0.01" value={preis} onChange={(e) => setPreis(e.target.value)} />
             </div>
           </div>
           <div className="space-y-2">
-            <Label>Dozent</Label>
-            <Select value={formData.dozent || 'none'} onValueChange={v => setFormData(p => ({ ...p, dozent: v === 'none' ? '' : v }))}>
-              <SelectTrigger className="w-full"><SelectValue placeholder="Dozent wählen..." /></SelectTrigger>
+            <Label htmlFor="kurs-dozent">Dozent</Label>
+            <Select value={dozentId || 'none'} onValueChange={(v) => setDozentId(v === 'none' ? '' : v)}>
+              <SelectTrigger id="kurs-dozent">
+                <SelectValue placeholder="Dozent wählen..." />
+              </SelectTrigger>
               <SelectContent>
-                <SelectItem value="none">– Kein Dozent –</SelectItem>
-                {dozenten.map(d => (
+                <SelectItem value="none">Kein Dozent</SelectItem>
+                {dozenten.map((d) => (
                   <SelectItem key={d.record_id} value={d.record_id}>
-                    {`${d.fields.vorname || ''} ${d.fields.nachname || ''}`.trim()}
+                    {`${d.fields.vorname || ''} ${d.fields.nachname || ''}`.trim() || 'Ohne Name'}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label>Raum</Label>
-            <Select value={formData.raum || 'none'} onValueChange={v => setFormData(p => ({ ...p, raum: v === 'none' ? '' : v }))}>
-              <SelectTrigger className="w-full"><SelectValue placeholder="Raum wählen..." /></SelectTrigger>
+            <Label htmlFor="kurs-raum">Raum</Label>
+            <Select value={raumId || 'none'} onValueChange={(v) => setRaumId(v === 'none' ? '' : v)}>
+              <SelectTrigger id="kurs-raum">
+                <SelectValue placeholder="Raum wählen..." />
+              </SelectTrigger>
               <SelectContent>
-                <SelectItem value="none">– Kein Raum –</SelectItem>
-                {raeume.map(r => (
+                <SelectItem value="none">Kein Raum</SelectItem>
+                {raeume.map((r) => (
                   <SelectItem key={r.record_id} value={r.record_id}>
-                    {r.fields.raumname || '(Ohne Name)'}{r.fields.gebaeude ? ` (${r.fields.gebaeude})` : ''}
+                    {`${r.fields.raumname || ''}${r.fields.gebaeude ? ` (${r.fields.gebaeude})` : ''}`}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -352,134 +467,12 @@ function KursDialog({
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Abbrechen</Button>
-            <Button type="submit" disabled={submitting}>{submitting ? 'Speichert...' : (isEditing ? 'Speichern' : 'Erstellen')}</Button>
+            <Button type="submit" disabled={submitting}>
+              {submitting ? 'Speichert...' : isEditing ? 'Speichern' : 'Erstellen'}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  )
-}
-
-// --- Kurs Detail Dialog ---
-function KursDetailDialog({
-  record, onClose, dozentMap, raumMap, teilnehmerMap, anmeldungen, onEdit, onDelete, onAddAnmeldung,
-}: {
-  record: Kurse | null
-  onClose: () => void
-  dozentMap: Map<string, Dozenten>
-  raumMap: Map<string, Raeume>
-  teilnehmerMap: Map<string, Teilnehmer>
-  anmeldungen: Anmeldungen[]
-  onEdit: (k: Kurse) => void
-  onDelete: (k: Kurse) => void
-  onAddAnmeldung: () => void
-}) {
-  if (!record) return null
-  const dozentId = extractRecordId(record.fields.dozent)
-  const dozent = dozentId ? dozentMap.get(dozentId) : null
-  const raumId = extractRecordId(record.fields.raum)
-  const raum = raumId ? raumMap.get(raumId) : null
-
-  return (
-    <Dialog open={!!record} onOpenChange={open => { if (!open) onClose() }}>
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>{record.fields.titel || '(Ohne Titel)'}</DialogTitle>
-          <DialogDescription>{record.fields.beschreibung || 'Keine Beschreibung'}</DialogDescription>
-        </DialogHeader>
-        <div className="space-y-3 text-sm">
-          <div className="grid grid-cols-2 gap-2">
-            {record.fields.startdatum && (
-              <div><span className="text-muted-foreground">Start:</span> {format(parseISO(record.fields.startdatum), 'dd.MM.yyyy', { locale: de })}</div>
-            )}
-            {record.fields.enddatum && (
-              <div><span className="text-muted-foreground">Ende:</span> {format(parseISO(record.fields.enddatum), 'dd.MM.yyyy', { locale: de })}</div>
-            )}
-            {record.fields.maximale_teilnehmer != null && (
-              <div><span className="text-muted-foreground">Max. Teilnehmer:</span> {record.fields.maximale_teilnehmer}</div>
-            )}
-            {record.fields.preis != null && (
-              <div><span className="text-muted-foreground">Preis:</span> {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(record.fields.preis)}</div>
-            )}
-            {dozent && (
-              <div><span className="text-muted-foreground">Dozent:</span> {dozent.fields.vorname} {dozent.fields.nachname}</div>
-            )}
-            {raum && (
-              <div><span className="text-muted-foreground">Raum:</span> {raum.fields.raumname}</div>
-            )}
-          </div>
-
-          {/* Enrolled participants */}
-          <div className="pt-3 border-t">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="font-semibold">Anmeldungen ({anmeldungen.length})</h3>
-              <Button size="sm" variant="outline" onClick={onAddAnmeldung}>
-                <UserPlus className="h-3 w-3 mr-1" /> Anmelden
-              </Button>
-            </div>
-            {anmeldungen.length === 0 ? (
-              <p className="text-muted-foreground text-xs">Noch keine Anmeldungen.</p>
-            ) : (
-              <div className="space-y-1">
-                {anmeldungen.map(a => {
-                  const tnId = extractRecordId(a.fields.teilnehmer)
-                  const tn = tnId ? teilnehmerMap.get(tnId) : null
-                  return (
-                    <div key={a.record_id} className="flex items-center justify-between py-1.5 text-xs">
-                      <span>{tn ? `${tn.fields.vorname} ${tn.fields.nachname}` : '–'}</span>
-                      <Badge variant={a.fields.bezahlt ? 'default' : 'secondary'} className="text-[10px]">
-                        {a.fields.bezahlt ? 'Bezahlt' : 'Offen'}
-                      </Badge>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-        </div>
-        <DialogFooter>
-          <Button variant="ghost" size="sm" className="text-destructive" onClick={() => onDelete(record)}>
-            <Trash2 className="h-4 w-4 mr-1" /> Löschen
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => onEdit(record)}>
-            <Pencil className="h-4 w-4 mr-1" /> Bearbeiten
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  )
-}
-
-function PageLoading() {
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <Skeleton className="h-8 w-32" />
-        <Skeleton className="h-9 w-32" />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-32 rounded-lg" />)}
-      </div>
-    </div>
-  )
-}
-
-function PageError({ error, onRetry }: { error: Error; onRetry: () => void }) {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 gap-4">
-      <AlertCircle className="h-12 w-12 text-destructive" />
-      <h2 className="text-lg font-semibold">Fehler beim Laden</h2>
-      <p className="text-muted-foreground text-sm">{error.message}</p>
-      <Button variant="outline" onClick={onRetry}>Erneut versuchen</Button>
-    </div>
-  )
-}
-
-function EmptyState({ message, actionLabel, onAction }: { message: string; actionLabel: string; onAction: () => void }) {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 gap-4">
-      <p className="text-muted-foreground">{message}</p>
-      <Button onClick={onAction}><Plus className="h-4 w-4 mr-2" /> {actionLabel}</Button>
-    </div>
-  )
+  );
 }

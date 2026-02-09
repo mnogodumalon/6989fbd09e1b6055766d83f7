@@ -1,481 +1,515 @@
-import { useState, useEffect, useMemo } from 'react'
-import { useNavigate } from 'react-router'
-import type { Kurse, Dozenten, Teilnehmer, Anmeldungen, Raeume } from '@/types/app'
-import { LivingAppsService, extractRecordId } from '@/services/livingAppsService'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Skeleton } from '@/components/ui/skeleton'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
-import { Plus, GraduationCap, Users, UserCheck, AlertCircle } from 'lucide-react'
-import { format, parseISO } from 'date-fns'
-import { de } from 'date-fns/locale'
-import { AnmeldungDialog } from '@/components/AnmeldungDialog'
-import { toast } from 'sonner'
+import { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import type { Kurse, Anmeldungen, Dozenten, Teilnehmer, Raeume } from '@/types/app';
+import { LivingAppsService, extractRecordId } from '@/services/livingAppsService';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
+import {
+  BookOpen,
+  GraduationCap,
+  Users,
+  Euro,
+  Plus,
+  ArrowRight,
+  AlertCircle,
+} from 'lucide-react';
+import { format, parseISO } from 'date-fns';
+import { de } from 'date-fns/locale';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AnmeldungDialog } from '@/pages/AnmeldungenPage';
+
+function formatCurrency(value: number | null | undefined): string {
+  if (value == null) return '-';
+  return new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR',
+  }).format(value);
+}
 
 export function DashboardOverview() {
-  const navigate = useNavigate()
-  const [kurse, setKurse] = useState<Kurse[]>([])
-  const [dozenten, setDozenten] = useState<Dozenten[]>([])
-  const [teilnehmer, setTeilnehmer] = useState<Teilnehmer[]>([])
-  const [anmeldungen, setAnmeldungen] = useState<Anmeldungen[]>([])
-  const [raeume, setRaeume] = useState<Raeume[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
-  const [showAnmeldungDialog, setShowAnmeldungDialog] = useState(false)
+  const navigate = useNavigate();
+  const [kurse, setKurse] = useState<Kurse[]>([]);
+  const [anmeldungen, setAnmeldungen] = useState<Anmeldungen[]>([]);
+  const [dozenten, setDozenten] = useState<Dozenten[]>([]);
+  const [teilnehmer, setTeilnehmer] = useState<Teilnehmer[]>([]);
+  const [raeume, setRaeume] = useState<Raeume[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [showAnmeldungDialog, setShowAnmeldungDialog] = useState(false);
 
-  async function loadData() {
+  async function fetchAll() {
     try {
-      setLoading(true)
-      setError(null)
-      const [k, d, t, a, r] = await Promise.all([
+      setLoading(true);
+      setError(null);
+      const [k, a, d, t, r] = await Promise.all([
         LivingAppsService.getKurse(),
+        LivingAppsService.getAnmeldungen(),
         LivingAppsService.getDozenten(),
         LivingAppsService.getTeilnehmer(),
-        LivingAppsService.getAnmeldungen(),
         LivingAppsService.getRaeume(),
-      ])
-      setKurse(k)
-      setDozenten(d)
-      setTeilnehmer(t)
-      setAnmeldungen(a)
-      setRaeume(r)
+      ]);
+      setKurse(k);
+      setAnmeldungen(a);
+      setDozenten(d);
+      setTeilnehmer(t);
+      setRaeume(r);
     } catch (err) {
-      setError(err instanceof Error ? err : new Error('Daten konnten nicht geladen werden'))
+      setError(err instanceof Error ? err : new Error('Unbekannter Fehler'));
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
-  useEffect(() => { loadData() }, [])
+  useEffect(() => { fetchAll(); }, []);
 
-  // Lookup maps
+  const today = new Date().toISOString().split('T')[0];
+
+  const aktivKurse = useMemo(
+    () => kurse.filter((k) => !k.fields.enddatum || k.fields.enddatum >= today),
+    [kurse, today]
+  );
+
+  const bezahltCount = useMemo(
+    () => anmeldungen.filter((a) => a.fields.bezahlt === true).length,
+    [anmeldungen]
+  );
+
+  const gesamtumsatz = useMemo(() => {
+    const kursMap = new Map<string, Kurse>();
+    kurse.forEach((k) => kursMap.set(k.record_id, k));
+    let sum = 0;
+    anmeldungen.forEach((a) => {
+      if (a.fields.bezahlt !== true) return;
+      const kursId = extractRecordId(a.fields.kurs);
+      if (!kursId) return;
+      const kurs = kursMap.get(kursId);
+      if (kurs?.fields.preis) sum += kurs.fields.preis;
+    });
+    return sum;
+  }, [anmeldungen, kurse]);
+
+  const chartData = useMemo(() => {
+    const months = new Map<string, number>();
+    anmeldungen.forEach((a) => {
+      const dateStr = a.fields.anmeldedatum || a.createdat;
+      if (!dateStr) return;
+      const monthKey = dateStr.substring(0, 7);
+      months.set(monthKey, (months.get(monthKey) || 0) + 1);
+    });
+    return Array.from(months.entries())
+      .sort(([a], [b]) => a.localeCompare(b))
+      .slice(-12)
+      .map(([month, count]) => ({
+        name: format(parseISO(month + '-01'), 'MMM yy', { locale: de }),
+        count,
+      }));
+  }, [anmeldungen]);
+
   const dozentMap = useMemo(() => {
-    const map = new Map<string, Dozenten>()
-    dozenten.forEach(d => map.set(d.record_id, d))
-    return map
-  }, [dozenten])
-
-  const teilnehmerMap = useMemo(() => {
-    const map = new Map<string, Teilnehmer>()
-    teilnehmer.forEach(t => map.set(t.record_id, t))
-    return map
-  }, [teilnehmer])
-
-  const kursMap = useMemo(() => {
-    const map = new Map<string, Kurse>()
-    kurse.forEach(k => map.set(k.record_id, k))
-    return map
-  }, [kurse])
+    const m = new Map<string, Dozenten>();
+    dozenten.forEach((d) => m.set(d.record_id, d));
+    return m;
+  }, [dozenten]);
 
   const raumMap = useMemo(() => {
-    const map = new Map<string, Raeume>()
-    raeume.forEach(r => map.set(r.record_id, r))
-    return map
-  }, [raeume])
+    const m = new Map<string, Raeume>();
+    raeume.forEach((r) => m.set(r.record_id, r));
+    return m;
+  }, [raeume]);
 
-  // Anmeldungen per Kurs
   const anmeldungenPerKurs = useMemo(() => {
-    const counts = new Map<string, number>()
-    anmeldungen.forEach(a => {
-      const kursId = extractRecordId(a.fields.kurs)
-      if (!kursId) return
-      counts.set(kursId, (counts.get(kursId) || 0) + 1)
-    })
-    return counts
-  }, [anmeldungen])
+    const counts = new Map<string, number>();
+    anmeldungen.forEach((a) => {
+      const kursId = extractRecordId(a.fields.kurs);
+      if (!kursId) return;
+      counts.set(kursId, (counts.get(kursId) || 0) + 1);
+    });
+    return counts;
+  }, [anmeldungen]);
 
-  // KPIs
-  const totalAnmeldungen = anmeldungen.length
-  const bezahlt = anmeldungen.filter(a => a.fields.bezahlt === true).length
-  const offen = totalAnmeldungen - bezahlt
-  const bezahltRatio = totalAnmeldungen > 0 ? (bezahlt / totalAnmeldungen) * 100 : 0
+  const upcomingKurse = useMemo(
+    () =>
+      kurse
+        .filter((k) => k.fields.startdatum && k.fields.startdatum >= today)
+        .sort((a, b) => (a.fields.startdatum || '').localeCompare(b.fields.startdatum || ''))
+        .slice(0, 5),
+    [kurse, today]
+  );
 
-  const freiePlaetze = useMemo(() => {
-    let total = 0
-    kurse.forEach(k => {
-      const max = k.fields.maximale_teilnehmer || 0
-      const enrolled = anmeldungenPerKurs.get(k.record_id) || 0
-      total += Math.max(0, max - enrolled)
-    })
-    return total
-  }, [kurse, anmeldungenPerKurs])
-
-  // Chart data
-  const chartData = useMemo(() => {
-    return kurse.map(k => ({
-      name: (k.fields.titel || 'Ohne Titel').length > 20
-        ? (k.fields.titel || 'Ohne Titel').substring(0, 20) + '…'
-        : (k.fields.titel || 'Ohne Titel'),
-      fullName: k.fields.titel || 'Ohne Titel',
-      count: anmeldungenPerKurs.get(k.record_id) || 0,
-      max: k.fields.maximale_teilnehmer || 0,
-    })).sort((a, b) => b.count - a.count)
-  }, [kurse, anmeldungenPerKurs])
-
-  // Recent anmeldungen
-  const recentAnmeldungen = useMemo(() => {
-    return [...anmeldungen]
-      .sort((a, b) => {
-        const da = a.fields.anmeldedatum || a.createdat
-        const db = b.fields.anmeldedatum || b.createdat
-        return db.localeCompare(da)
-      })
-      .slice(0, 8)
-  }, [anmeldungen])
-
-  // Kurse sorted by available spots
-  const kurseWithCapacity = useMemo(() => {
-    return kurse
-      .map(k => {
-        const enrolled = anmeldungenPerKurs.get(k.record_id) || 0
-        const max = k.fields.maximale_teilnehmer || 0
-        const available = Math.max(0, max - enrolled)
-        const fillPercent = max > 0 ? (enrolled / max) * 100 : 0
-        return { ...k, enrolled, max, available, fillPercent }
-      })
-      .filter(k => k.available > 0)
-      .sort((a, b) => a.available - b.available)
-      .slice(0, 5)
-  }, [kurse, anmeldungenPerKurs])
-
-  // Top kurse for mobile
-  const topKurse = useMemo(() => {
-    return kurse
-      .map(k => {
-        const enrolled = anmeldungenPerKurs.get(k.record_id) || 0
-        const max = k.fields.maximale_teilnehmer || 0
-        const fillPercent = max > 0 ? (enrolled / max) * 100 : 0
-        const dozentId = extractRecordId(k.fields.dozent)
-        const dozent = dozentId ? dozentMap.get(dozentId) : null
-        const raumId = extractRecordId(k.fields.raum)
-        const raum = raumId ? raumMap.get(raumId) : null
-        return { ...k, enrolled, max, fillPercent, dozent, raum }
-      })
-      .sort((a, b) => {
-        const da = a.fields.startdatum || ''
-        const db = b.fields.startdatum || ''
-        return da.localeCompare(db)
-      })
-      .slice(0, 5)
-  }, [kurse, anmeldungenPerKurs, dozentMap, raumMap])
+  const paymentPercent = anmeldungen.length > 0 ? (bezahltCount / anmeldungen.length) * 100 : 0;
 
   if (loading) {
-    return <LoadingState />
+    return <LoadingSkeleton />;
   }
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 gap-4">
-        <AlertCircle className="h-12 w-12 text-destructive" />
-        <h2 className="text-lg font-semibold">Fehler beim Laden</h2>
-        <p className="text-muted-foreground text-sm">{error.message}</p>
-        <Button variant="outline" onClick={loadData}>Erneut versuchen</Button>
+      <div className="space-y-4">
+        <h1 className="text-2xl font-bold">Übersicht</h1>
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Fehler beim Laden</AlertTitle>
+          <AlertDescription className="flex items-center gap-2">
+            {error.message}
+            <Button variant="outline" size="sm" onClick={fetchAll}>
+              Erneut versuchen
+            </Button>
+          </AlertDescription>
+        </Alert>
       </div>
-    )
+    );
   }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl md:text-[28px] font-extrabold tracking-tight">Kursverwaltung</h1>
-        <Button onClick={() => setShowAnmeldungDialog(true)} className="hidden md:inline-flex">
+        <h1 className="text-2xl font-bold">Übersicht</h1>
+        <Button onClick={() => setShowAnmeldungDialog(true)} className="hidden md:flex">
           <Plus className="h-4 w-4 mr-2" />
           Neue Anmeldung
         </Button>
+        <Button
+          size="icon"
+          onClick={() => setShowAnmeldungDialog(true)}
+          className="md:hidden"
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
       </div>
 
-      {/* Desktop: Two-column layout */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_0.54fr] gap-6">
-        {/* Left column */}
-        <div className="space-y-6">
-          {/* Hero KPI */}
-          <Card className="shadow-md relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-primary" />
-            <CardContent className="pt-6 pb-5 px-6">
-              <p className="text-[13px] text-muted-foreground font-medium">Anmeldungen gesamt</p>
-              <p className="text-[48px] md:text-[56px] font-extrabold leading-none mt-1 tracking-tight">
-                {totalAnmeldungen}
+      {/* Hero KPI Card */}
+      <Card className="bg-accent/30 border-primary/20">
+        <CardContent className="pt-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <p className="text-sm text-muted-foreground font-medium">Anmeldungen gesamt</p>
+              <p className="text-5xl md:text-6xl font-extrabold text-foreground tracking-tight">
+                {anmeldungen.length}
               </p>
-              {/* Payment bar */}
-              <div className="mt-4 space-y-2">
-                <div className="h-3 rounded-full bg-muted overflow-hidden flex">
-                  <div
-                    className="h-full rounded-full bg-primary transition-all duration-500"
-                    style={{ width: `${bezahltRatio}%` }}
-                  />
-                </div>
-                <div className="flex items-center gap-4 text-[13px]">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block" />
-                    <span className="font-medium">{bezahlt}</span>
-                    <span className="text-muted-foreground">bezahlt</span>
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30 inline-block" />
-                    <span className="font-medium">{offen}</span>
-                    <span className="text-muted-foreground">offen</span>
-                  </span>
-                </div>
+            </div>
+            <div className="flex-1 max-w-md">
+              <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-primary rounded-full transition-all duration-500"
+                  style={{ width: `${paymentPercent}%` }}
+                />
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Quick Stats - mobile horizontal scroll, desktop grid */}
-          <div className="flex md:grid md:grid-cols-3 gap-3 overflow-x-auto pb-1 -mx-4 px-4 md:mx-0 md:px-0">
-            <StatCard icon={GraduationCap} label="Aktive Kurse" value={kurse.length} />
-            <StatCard icon={Users} label="Dozenten" value={dozenten.length} />
-            <StatCard icon={UserCheck} label="Freie Plätze" value={freiePlaetze} />
+              <p className="text-sm text-muted-foreground mt-1.5">
+                {bezahltCount} von {anmeldungen.length} bezahlt
+              </p>
+            </div>
+            <div className="hidden md:block text-right">
+              <p className="text-sm text-muted-foreground font-medium">Umsatz (bezahlt)</p>
+              <p className="text-3xl font-bold text-foreground">{formatCurrency(gesamtumsatz)}</p>
+            </div>
           </div>
+        </CardContent>
+      </Card>
 
-          {/* Mobile: Kurse Übersicht */}
-          <div className="md:hidden space-y-3">
-            <h2 className="text-base font-semibold">Kurse Übersicht</h2>
-            {topKurse.length === 0 ? (
-              <p className="text-sm text-muted-foreground">Noch keine Kurse vorhanden.</p>
+      {/* Secondary Stats Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <StatCard
+          label="Aktive Kurse"
+          value={aktivKurse.length}
+          icon={BookOpen}
+          onClick={() => navigate('/kurse')}
+        />
+        <StatCard
+          label="Dozenten"
+          value={dozenten.length}
+          icon={GraduationCap}
+          onClick={() => navigate('/dozenten')}
+        />
+        <StatCard
+          label="Teilnehmer"
+          value={teilnehmer.length}
+          icon={Users}
+          onClick={() => navigate('/teilnehmer')}
+        />
+        <StatCard
+          label="Umsatz"
+          value={formatCurrency(gesamtumsatz)}
+          icon={Euro}
+          className="md:hidden"
+          onClick={() => navigate('/anmeldungen')}
+        />
+        <StatCard
+          label="Freie Plätze"
+          value={kurse.reduce((sum, k) => {
+            const max = k.fields.maximale_teilnehmer || 0;
+            const enrolled = anmeldungenPerKurs.get(k.record_id) || 0;
+            return sum + Math.max(0, max - enrolled);
+          }, 0)}
+          icon={Users}
+          className="hidden md:flex"
+          onClick={() => navigate('/kurse')}
+        />
+      </div>
+
+      {/* Chart + Stats (Desktop 2/3 + 1/3) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <Card className="md:col-span-2">
+          <CardHeader>
+            <CardTitle className="text-base font-semibold">Anmeldungen pro Monat</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {chartData.length === 0 ? (
+              <p className="text-sm text-muted-foreground py-8 text-center">
+                Noch keine Anmeldedaten vorhanden
+              </p>
             ) : (
-              topKurse.map(k => {
-                const fillColor = k.fillPercent >= 100 ? 'destructive' : k.fillPercent >= 80 ? 'secondary' : 'default'
+              <div className="h-[280px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData}>
+                    <XAxis
+                      dataKey="name"
+                      tick={{ fontSize: 12 }}
+                      stroke="hsl(220 10% 46%)"
+                    />
+                    <YAxis
+                      tick={{ fontSize: 12 }}
+                      stroke="hsl(220 10% 46%)"
+                      allowDecimals={false}
+                      className="hidden md:block"
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: 'hsl(0 0% 100%)',
+                        border: '1px solid hsl(40 15% 90%)',
+                        borderRadius: '8px',
+                        fontSize: '13px',
+                      }}
+                      formatter={(value: number) => [value, 'Anmeldungen']}
+                    />
+                    <Bar
+                      dataKey="count"
+                      fill="hsl(174 62% 32%)"
+                      radius={[4, 4, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Upcoming courses on desktop sidebar */}
+        <Card className="hidden md:block">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-base font-semibold">Bald startend</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {upcomingKurse.length === 0 ? (
+              <p className="text-sm text-muted-foreground">Keine kommenden Kurse</p>
+            ) : (
+              upcomingKurse.slice(0, 4).map((kurs) => {
+                const enrolled = anmeldungenPerKurs.get(kurs.record_id) || 0;
+                const max = kurs.fields.maximale_teilnehmer;
                 return (
-                  <Card
-                    key={k.record_id}
-                    className="cursor-pointer hover:shadow-md transition-shadow"
-                    onClick={() => navigate('/kurse')}
-                  >
-                    <CardContent className="py-3 px-4">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="min-w-0">
-                          <p className="font-semibold text-[15px] truncate">{k.fields.titel}</p>
-                          <p className="text-[13px] text-muted-foreground truncate">
-                            {k.dozent ? `${k.dozent.fields.vorname} ${k.dozent.fields.nachname}` : '–'}
-                            {k.raum ? ` · ${k.raum.fields.raumname}` : ''}
-                          </p>
-                          {(k.fields.startdatum || k.fields.enddatum) && (
-                            <p className="text-[13px] text-muted-foreground">
-                              {k.fields.startdatum ? format(parseISO(k.fields.startdatum), 'dd.MM.yyyy', { locale: de }) : '–'}
-                              {' – '}
-                              {k.fields.enddatum ? format(parseISO(k.fields.enddatum), 'dd.MM.yyyy', { locale: de }) : '–'}
-                            </p>
-                          )}
-                        </div>
-                        <Badge variant={fillColor === 'destructive' ? 'destructive' : fillColor === 'secondary' ? 'secondary' : 'outline'}>
-                          {k.enrolled}/{k.max || '∞'}
-                        </Badge>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })
-            )}
-            {kurse.length > 5 && (
-              <Button variant="ghost" className="w-full text-primary" onClick={() => navigate('/kurse')}>
-                Alle anzeigen
-              </Button>
-            )}
-          </div>
-
-          {/* Desktop: Chart */}
-          <Card className="hidden md:block">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Anmeldungen pro Kurs</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {chartData.length === 0 ? (
-                <p className="text-sm text-muted-foreground py-8 text-center">Noch keine Kursdaten vorhanden.</p>
-              ) : (
-                <div className="h-[280px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={chartData} layout="vertical" margin={{ left: 0, right: 16, top: 8, bottom: 8 }}>
-                      <XAxis type="number" tick={{ fontSize: 12 }} stroke="hsl(230 10% 50%)" />
-                      <YAxis
-                        type="category"
-                        dataKey="name"
-                        width={140}
-                        tick={{ fontSize: 12 }}
-                        stroke="hsl(230 10% 50%)"
-                      />
-                      <Tooltip
-                        formatter={(value: number, _name: string, props: { payload?: { fullName?: string; max?: number } }) => [
-                          `${value} / ${props.payload?.max || '–'}`,
-                          props.payload?.fullName || '',
-                        ]}
-                        contentStyle={{
-                          backgroundColor: 'hsl(0 0% 100%)',
-                          border: '1px solid hsl(230 15% 90%)',
-                          borderRadius: '8px',
-                          fontSize: '13px',
-                        }}
-                      />
-                      <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={28}>
-                        {chartData.map((entry, index) => (
-                          <Cell
-                            key={index}
-                            fill={entry.max > 0 && entry.count >= entry.max ? 'hsl(0 72% 51%)' : 'hsl(243 55% 54%)'}
-                          />
-                        ))}
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Mobile: Recent Anmeldungen */}
-          <div className="md:hidden space-y-3">
-            <h2 className="text-base font-semibold">Letzte Anmeldungen</h2>
-            <RecentAnmeldungenList
-              anmeldungen={recentAnmeldungen.slice(0, 5)}
-              teilnehmerMap={teilnehmerMap}
-              kursMap={kursMap}
-            />
-          </div>
-        </div>
-
-        {/* Right column (desktop only) */}
-        <div className="hidden md:block space-y-6">
-          {/* Recent Anmeldungen */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Letzte Anmeldungen</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <RecentAnmeldungenList
-                anmeldungen={recentAnmeldungen}
-                teilnehmerMap={teilnehmerMap}
-                kursMap={kursMap}
-              />
-            </CardContent>
-          </Card>
-
-          {/* Kurse mit freien Plätzen */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Kurse mit freien Plätzen</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {kurseWithCapacity.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Alle Kurse sind voll belegt.</p>
-              ) : (
-                kurseWithCapacity.map(k => (
-                  <div key={k.record_id} className="space-y-1.5">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="font-medium truncate mr-2">{k.fields.titel}</span>
-                      <span className="text-muted-foreground whitespace-nowrap text-xs">
-                        {k.enrolled}/{k.max}
-                      </span>
-                    </div>
-                    <div className="h-2 rounded-full bg-muted overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-primary transition-all"
-                        style={{ width: `${k.fillPercent}%` }}
-                      />
+                  <div key={kurs.record_id} className="space-y-1">
+                    <p className="text-sm font-medium leading-tight">{kurs.fields.titel || 'Ohne Titel'}</p>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      {kurs.fields.startdatum && (
+                        <span>{format(parseISO(kurs.fields.startdatum), 'dd.MM.yyyy', { locale: de })}</span>
+                      )}
+                      <Badge variant="secondary" className="text-xs">
+                        {enrolled}{max ? `/${max}` : ''}
+                      </Badge>
                     </div>
                   </div>
-                ))
-              )}
-            </CardContent>
-          </Card>
-        </div>
+                );
+              })
+            )}
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Mobile FAB */}
-      <button
-        onClick={() => setShowAnmeldungDialog(true)}
-        className="md:hidden fixed bottom-20 right-4 z-40 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow active:scale-95"
-      >
-        <Plus className="h-6 w-6" />
-      </button>
+      {/* Upcoming Courses Table/List */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-base font-semibold">Kommende Kurse</CardTitle>
+          <Button variant="ghost" size="sm" onClick={() => navigate('/kurse')}>
+            Alle anzeigen <ArrowRight className="h-4 w-4 ml-1" />
+          </Button>
+        </CardHeader>
+        <CardContent>
+          {upcomingKurse.length === 0 ? (
+            <p className="text-sm text-muted-foreground py-4 text-center">
+              Keine kommenden Kurse vorhanden
+            </p>
+          ) : (
+            <>
+              {/* Desktop Table */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b text-left text-muted-foreground">
+                      <th className="pb-2 font-medium">Kurstitel</th>
+                      <th className="pb-2 font-medium">Dozent</th>
+                      <th className="pb-2 font-medium">Raum</th>
+                      <th className="pb-2 font-medium">Start</th>
+                      <th className="pb-2 font-medium">Ende</th>
+                      <th className="pb-2 font-medium text-center">Teilnehmer</th>
+                      <th className="pb-2 font-medium text-right">Preis</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {upcomingKurse.map((kurs) => {
+                      const dozentId = extractRecordId(kurs.fields.dozent);
+                      const dozent = dozentId ? dozentMap.get(dozentId) : null;
+                      const raumId = extractRecordId(kurs.fields.raum);
+                      const raum = raumId ? raumMap.get(raumId) : null;
+                      const enrolled = anmeldungenPerKurs.get(kurs.record_id) || 0;
+                      const max = kurs.fields.maximale_teilnehmer;
+
+                      return (
+                        <tr
+                          key={kurs.record_id}
+                          className="border-b last:border-0 hover:bg-muted/50 transition-colors cursor-pointer"
+                          onClick={() => navigate('/kurse')}
+                        >
+                          <td className="py-3 font-medium">{kurs.fields.titel || '-'}</td>
+                          <td className="py-3 text-muted-foreground">
+                            {dozent ? `${dozent.fields.vorname || ''} ${dozent.fields.nachname || ''}`.trim() : '-'}
+                          </td>
+                          <td className="py-3 text-muted-foreground">
+                            {raum ? raum.fields.raumname || '-' : '-'}
+                          </td>
+                          <td className="py-3">
+                            {kurs.fields.startdatum
+                              ? format(parseISO(kurs.fields.startdatum), 'dd.MM.yyyy', { locale: de })
+                              : '-'}
+                          </td>
+                          <td className="py-3">
+                            {kurs.fields.enddatum
+                              ? format(parseISO(kurs.fields.enddatum), 'dd.MM.yyyy', { locale: de })
+                              : '-'}
+                          </td>
+                          <td className="py-3 text-center">
+                            <Badge variant={max && enrolled >= max ? 'destructive' : 'secondary'}>
+                              {enrolled}{max ? `/${max}` : ''}
+                            </Badge>
+                          </td>
+                          <td className="py-3 text-right">{formatCurrency(kurs.fields.preis)}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile Card List */}
+              <div className="md:hidden space-y-3">
+                {upcomingKurse.map((kurs) => {
+                  const dozentId = extractRecordId(kurs.fields.dozent);
+                  const dozent = dozentId ? dozentMap.get(dozentId) : null;
+                  const enrolled = anmeldungenPerKurs.get(kurs.record_id) || 0;
+                  const max = kurs.fields.maximale_teilnehmer;
+
+                  return (
+                    <div
+                      key={kurs.record_id}
+                      className="p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
+                      onClick={() => navigate('/kurse')}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-1">
+                          <p className="font-semibold text-[15px]">{kurs.fields.titel || 'Ohne Titel'}</p>
+                          {dozent && (
+                            <p className="text-[13px] text-muted-foreground">
+                              {dozent.fields.vorname} {dozent.fields.nachname}
+                            </p>
+                          )}
+                          <p className="text-[13px] text-muted-foreground">
+                            {kurs.fields.startdatum
+                              ? format(parseISO(kurs.fields.startdatum), 'dd.MM.yyyy', { locale: de })
+                              : ''}
+                            {kurs.fields.enddatum
+                              ? ` - ${format(parseISO(kurs.fields.enddatum), 'dd.MM.yyyy', { locale: de })}`
+                              : ''}
+                          </p>
+                        </div>
+                        <Badge variant={max && enrolled >= max ? 'destructive' : 'secondary'}>
+                          {enrolled}{max ? `/${max}` : ''}
+                        </Badge>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Anmeldung Dialog */}
       <AnmeldungDialog
         open={showAnmeldungDialog}
         onOpenChange={setShowAnmeldungDialog}
+        record={null}
         kurse={kurse}
         teilnehmer={teilnehmer}
-        onSuccess={() => {
-          toast.success('Anmeldung erstellt')
-          loadData()
-        }}
+        onSuccess={fetchAll}
       />
     </div>
-  )
+  );
 }
 
-function StatCard({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: number }) {
+function StatCard({
+  label,
+  value,
+  icon: Icon,
+  onClick,
+  className,
+}: {
+  label: string;
+  value: string | number;
+  icon: React.ComponentType<{ className?: string }>;
+  onClick?: () => void;
+  className?: string;
+}) {
   return (
-    <Card className="min-w-[130px] flex-shrink-0 md:flex-shrink">
-      <CardContent className="py-3 px-4 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-          <Icon className="h-4 w-4 text-primary" />
+    <Card
+      className={`cursor-pointer hover:shadow-md transition-shadow ${className || ''}`}
+      onClick={onClick}
+    >
+      <CardContent className="pt-4 pb-4">
+        <div className="flex items-center justify-between mb-1">
+          <p className="text-xs font-medium text-muted-foreground">{label}</p>
+          <Icon className="h-4 w-4 text-muted-foreground" />
         </div>
-        <div>
-          <p className="text-xl font-bold leading-none">{value}</p>
-          <p className="text-[11px] text-muted-foreground mt-0.5">{label}</p>
-        </div>
+        <p className="text-2xl font-bold">{value}</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
-function RecentAnmeldungenList({
-  anmeldungen,
-  teilnehmerMap,
-  kursMap,
-}: {
-  anmeldungen: Anmeldungen[]
-  teilnehmerMap: Map<string, Teilnehmer>
-  kursMap: Map<string, Kurse>
-}) {
-  if (anmeldungen.length === 0) {
-    return <p className="text-sm text-muted-foreground">Noch keine Anmeldungen vorhanden.</p>
-  }
-
-  return (
-    <div className="space-y-2">
-      {anmeldungen.map(a => {
-        const teilnehmerId = extractRecordId(a.fields.teilnehmer)
-        const tn = teilnehmerId ? teilnehmerMap.get(teilnehmerId) : null
-        const kursId = extractRecordId(a.fields.kurs)
-        const kurs = kursId ? kursMap.get(kursId) : null
-        const name = tn ? `${tn.fields.vorname || ''} ${tn.fields.nachname || ''}`.trim() : '–'
-        const kursName = kurs?.fields.titel || '–'
-
-        return (
-          <div key={a.record_id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-            <div className="min-w-0 mr-2">
-              <p className="text-sm font-medium truncate">{name}</p>
-              <p className="text-xs text-muted-foreground truncate">{kursName}</p>
-            </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
-              {a.fields.anmeldedatum && (
-                <span className="text-xs text-muted-foreground">
-                  {format(parseISO(a.fields.anmeldedatum), 'dd.MM.', { locale: de })}
-                </span>
-              )}
-              <Badge variant={a.fields.bezahlt ? 'default' : 'secondary'} className="text-[10px] px-1.5 py-0.5">
-                {a.fields.bezahlt ? 'Bezahlt' : 'Offen'}
-              </Badge>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-function LoadingState() {
+function LoadingSkeleton() {
   return (
     <div className="space-y-6">
-      <Skeleton className="h-8 w-48" />
-      <Skeleton className="h-48 w-full rounded-lg" />
-      <div className="grid grid-cols-3 gap-3">
-        <Skeleton className="h-20 rounded-lg" />
-        <Skeleton className="h-20 rounded-lg" />
-        <Skeleton className="h-20 rounded-lg" />
+      <div className="flex items-center justify-between">
+        <Skeleton className="h-8 w-32" />
+        <Skeleton className="h-10 w-36" />
       </div>
-      <Skeleton className="h-64 w-full rounded-lg" />
+      <Skeleton className="h-32 w-full rounded-xl" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[...Array(4)].map((_, i) => (
+          <Skeleton key={i} className="h-20 rounded-xl" />
+        ))}
+      </div>
+      <Skeleton className="h-80 w-full rounded-xl" />
+      <Skeleton className="h-60 w-full rounded-xl" />
     </div>
-  )
+  );
 }

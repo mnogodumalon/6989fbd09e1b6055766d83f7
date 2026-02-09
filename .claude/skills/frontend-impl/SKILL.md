@@ -775,6 +775,41 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 **⚠️ CRITICAL: Always use `basename={import.meta.env.BASE_URL}`!** The dashboard is deployed to GitHub Pages under a subpath (e.g. `/repo-name/`). Without basename, all routes will break in production.
 
+### ⚠️ CRITICAL: Reverse Proxy Base Path (my.living-apps.de)
+
+The dashboard is deployed to GitHub Pages but accessed through a **reverse proxy** at:
+```
+https://my.living-apps.de/github/<repo-name>/
+```
+
+The reverse proxy adds `/github/` to the path. The `base` in `vite.config.ts` **MUST match the actual URL path** where users access the site, not just the GitHub Pages path.
+
+**How it works:**
+1. GitHub Pages serves files at: `https://<user>.github.io/<repo-name>/`
+2. Reverse proxy maps: `my.living-apps.de/github/<repo-name>/` → `<user>.github.io/<repo-name>/`
+3. Users access: `https://my.living-apps.de/github/<repo-name>/`
+4. Browser sees URL path: `/github/<repo-name>/`
+
+**Therefore `vite.config.ts` must use:**
+```typescript
+export default defineConfig({
+  base: '/github/<repo-name>/',  // ✅ Matches the actual URL path via reverse proxy
+  // NOT: base: '/<repo-name>/',  // ❌ Only matches direct GitHub Pages URL
+});
+```
+
+**Why this matters:**
+- `import.meta.env.BASE_URL` returns the value of `base` from vite.config.ts
+- This is used as `<BrowserRouter basename={import.meta.env.BASE_URL}>`
+- If `basename` doesn't match the actual URL path, React Router **renders nothing** and shows:
+  ```
+  <Router basename="/repo/"> is not able to match the URL "/github/repo/"
+  ```
+- Asset paths (`<script>`, `<link>`) also use `base`, so they must match the proxy path
+
+**Bonus: CORS resolved automatically!**
+When the site is served from `my.living-apps.de` (same domain as the API), API calls to `https://my.living-apps.de/rest/...` are **same-origin** — no CORS issues. This only works when users access via the reverse proxy, not via direct GitHub Pages URL.
+
 ### Step 3: Define Routes in App.tsx
 
 ```typescript
