@@ -12,7 +12,7 @@ import TeilnehmerPage from '@/pages/TeilnehmerPage';
 import AnmeldungenPage from '@/pages/AnmeldungenPage';
 
 import './App.css';
-// Cache bust v2
+// Cache bust v4
 
 function App() {
   return (
@@ -21,11 +21,11 @@ function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<DashboardPage />} />
-            <Route path="kurse" element={<KursePage />} />
-            <Route path="raeume" element={<RaeumePage />} />
-            <Route path="dozenten" element={<DozentenPage />} />
-            <Route path="teilnehmer" element={<TeilnehmerPage />} />
-            <Route path="anmeldungen" element={<AnmeldungenPage />} />
+            <Route path="/kurse" element={<KursePage />} />
+            <Route path="/raeume" element={<RaeumePage />} />
+            <Route path="/dozenten" element={<DozentenPage />} />
+            <Route path="/teilnehmer" element={<TeilnehmerPage />} />
+            <Route path="/anmeldungen" element={<AnmeldungenPage />} />
           </Route>
         </Routes>
         <Toaster position="bottom-right" richColors />
