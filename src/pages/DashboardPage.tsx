@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { extractRecordId } from '@/services/livingAppsService';
 import { format, parseISO } from 'date-fns';
@@ -36,7 +35,6 @@ function todayISO(): string {
 }
 
 export default function DashboardPage() {
-  const navigate = useNavigate();
   const { 
     kurse, anmeldungen, teilnehmer, 
     loading, error, fetchAll,
@@ -105,7 +103,7 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-        <Button onClick={() => navigate('/anmeldungen')}>
+        <Button onClick={() => { window.location.hash = '#/anmeldungen'; }}>
           <Plus className="h-4 w-4 mr-1" />
           Neue Anmeldung
         </Button>
@@ -223,7 +221,7 @@ export default function DashboardPage() {
                     <div
                       key={a.record_id}
                       className="flex items-center justify-between py-3 cursor-pointer hover:bg-muted/50 -mx-4 px-4 rounded transition-colors"
-                      onClick={() => navigate('/anmeldungen')}
+                      onClick={() => { window.location.hash = '#/anmeldungen'; }}
                     >
                       <div className="min-w-0">
                         <div className="font-medium text-sm truncate">
