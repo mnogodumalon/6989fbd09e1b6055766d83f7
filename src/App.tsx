@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { DataProvider } from '@/context/DataContext';
 import AppLayout from '@/components/layout/AppLayout';

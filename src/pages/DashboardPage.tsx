@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { extractRecordId } from '@/services/livingAppsService';
 import { format, parseISO } from 'date-fns';
