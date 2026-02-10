@@ -1,4 +1,3 @@
-import { NavLink, Outlet } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -9,20 +8,27 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import type { RouteName } from '@/hooks/useHashRoute';
 
-const navItems = [
-  { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/kurse', icon: BookOpen, label: 'Kurse' },
-  { to: '/raeume', icon: DoorOpen, label: 'Räume' },
-  { to: '/dozenten', icon: GraduationCap, label: 'Dozenten' },
-  { to: '/teilnehmer', icon: Users, label: 'Teilnehmer' },
-  { to: '/anmeldungen', icon: ClipboardList, label: 'Anmeldungen' },
+const navItems: { id: RouteName; icon: React.ComponentType<{ className?: string }>; label: string }[] = [
+  { id: '', icon: LayoutDashboard, label: 'Dashboard' },
+  { id: 'kurse', icon: BookOpen, label: 'Kurse' },
+  { id: 'raeume', icon: DoorOpen, label: 'Räume' },
+  { id: 'dozenten', icon: GraduationCap, label: 'Dozenten' },
+  { id: 'teilnehmer', icon: Users, label: 'Teilnehmer' },
+  { id: 'anmeldungen', icon: ClipboardList, label: 'Anmeldungen' },
 ];
 
-export default function AppLayout() {
+interface AppLayoutProps {
+  route: RouteName;
+  navigateTo: (target: RouteName) => void;
+  children: ReactNode;
+}
+
+export default function AppLayout({ route, navigateTo, children }: AppLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -68,25 +74,29 @@ export default function AppLayout() {
 
         {/* Navigation */}
         <nav className="p-4 space-y-1">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              onClick={() => setSidebarOpen(false)}
-              className={({ isActive }) =>
-                cn(
+          {navItems.map((item) => {
+            const isActive = route === item.id;
+            return (
+              <a
+                key={item.id}
+                href={item.id === '' ? '#/' : '#/' + item.id}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo(item.id);
+                  setSidebarOpen(false);
+                }}
+                className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                )
-              }
-              end={item.to === '/'}
-            >
-              <item.icon className="h-4 w-4" />
-              {item.label}
-            </NavLink>
-          ))}
+                )}
+              >
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Footer */}
@@ -100,10 +110,9 @@ export default function AppLayout() {
       {/* Main Content */}
       <main className="lg:pl-64 pt-14 lg:pt-0 min-h-screen">
         <div className="p-4 md:p-6 lg:p-8">
-          <Outlet />
+          {children}
         </div>
       </main>
     </div>
   );
 }
-

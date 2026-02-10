@@ -1,6 +1,7 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { DataProvider } from '@/context/DataContext';
+import { useHashRoute } from '@/hooks/useHashRoute';
+import type { RouteName } from '@/hooks/useHashRoute';
 import AppLayout from '@/components/layout/AppLayout';
 
 // Pages
@@ -12,27 +13,28 @@ import TeilnehmerPage from '@/pages/TeilnehmerPage';
 import AnmeldungenPage from '@/pages/AnmeldungenPage';
 
 import './App.css';
-// Cache bust v5
+// Cache bust v6
+
+const pageMap: Record<RouteName, React.ComponentType> = {
+  '': DashboardPage,
+  kurse: KursePage,
+  raeume: RaeumePage,
+  dozenten: DozentenPage,
+  teilnehmer: TeilnehmerPage,
+  anmeldungen: AnmeldungenPage,
+};
 
 function App() {
+  const { route, navigateTo } = useHashRoute();
+  const PageComponent = pageMap[route] ?? DashboardPage;
+
   return (
-    <HashRouter>
-      <DataProvider>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<DashboardPage />} />
-            <Route path="/kurse" element={<KursePage />} />
-            <Route path="/raeume" element={<RaeumePage />} />
-            <Route path="/dozenten" element={<DozentenPage />} />
-            <Route path="/teilnehmer" element={<TeilnehmerPage />} />
-            <Route path="/anmeldungen" element={<AnmeldungenPage />} />
-            {/* Catch-all: redirect any unmatched path (e.g. from proxy path pollution) to dashboard */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
-        <Toaster position="bottom-right" richColors />
-      </DataProvider>
-    </HashRouter>
+    <DataProvider>
+      <AppLayout route={route} navigateTo={navigateTo}>
+        <PageComponent />
+      </AppLayout>
+      <Toaster position="bottom-right" richColors />
+    </DataProvider>
   );
 }
 
