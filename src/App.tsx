@@ -12,6 +12,7 @@ import TeilnehmerPage from '@/pages/TeilnehmerPage';
 import AnmeldungenPage from '@/pages/AnmeldungenPage';
 
 import './App.css';
+// Cache bust v2
 
 function App() {
   return (
